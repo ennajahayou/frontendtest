@@ -1,0 +1,91 @@
+.action-item {
+    background-color: #CACFD2;
+    padding: 15px 30px;
+    margin: 10px 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+}
+
+.date {
+    flex: 1;
+    font-weight: 500;
+    color: #333;
+    font-family: 'Kumbh Sans';
+}
+
+.status {
+    flex: 2;
+    padding: 7px 15px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.status.accepté {
+    background-color: #d4edda; 
+    color: #155724;
+}
+
+.status.refusé {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+   /* pour centrer verticalement */
+ /* pour centrer horizontalement */
+    width: 100%; 
+    height: 832px;/* ajustez selon vos besoins */
+}
+
+.Archives {
+    padding: 20px;
+    justify-content: flex-start;
+    flex-grow: 1;
+    width: 70%;
+    background-color: #B7D6ED;
+    height: 95%;
+
+}
+
+.Archives-board {
+    position: relative;
+    width: 100%;
+    height: 100px; /* exemple de hauteur, ajustez selon vos besoins */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Kumbh Sans', sans-serif;
+    margin-top: 18px;
+  
+  }
+
+.Archives h1 {
+    font-size: xx-large; /* Augmente la taille de la police */
+    margin-bottom: 20px;
+    font-family: 'Kumbh Sans';
+    color: #305E7E;
+
+     /* Ajoutez de l'espace en dessous du titre */
+}
+
+.actions {
+height: max-content;
+background-color: white;
+padding: 40px;
+height: 550px;
+
+overflow-x: hidden; /* Cache la barre de défilement horizontale */
+overflow-y: auto; 
+font-family: 'Kumbh Sans';
+}
+
+
+

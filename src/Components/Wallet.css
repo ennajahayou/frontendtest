@@ -1,0 +1,111 @@
+.wallet-item {
+  font-family: "Kumbh Sans";
+  width: 770px;
+  height: 7vh;
+  margin-left: 20px;
+  border-radius: 84px;
+  background-color: white; /* Espace à l'intérieur des rectangles */
+  margin-bottom: 15px;
+  margin-top: 0px; /* Espace entre les rectangles */
+  border: 1px solid #ccc; /* Bordure autour des rectangles */
+  border-radius: 20px; /* Coins arrondis */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.wallet-item h4{
+  width: 40%;
+  margin-left: 10%;
+}
+
+/* Flexbox styles for row containers */
+.row-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  margin-top: 20px; /* Adjust margin as needed */
+  margin-left: 15px;
+  margin-right: 90px;
+  height: 40px;
+}
+
+.symbole_th {
+  width: 20px; /* largeur de l'image */
+  height: 20px; /* hauteur de l'image */
+  margin-left: 5px; /* espace entre le texte "0" et l'image */
+}
+
+
+.row-item {
+  background-color: white;
+  width: 221px; /* Adjust width as needed */
+  height: 40px;
+  border: 1px solid #ccc; /* Example border */
+  padding: 10px; /* Example padding */
+  box-sizing: border-box; /* Adjust box-sizing as needed */
+  margin-left: 21px;
+  text-align: center;
+  font-family: "Kumbh Sans";
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+
+.wallet-list {
+  width: 90%; /* Fixer la largeur à 90% de la largeur du parent */
+  margin: auto;
+  font-family: "Kumbh Sans";
+  display: flex;
+  height: 20vh;
+   /* Ajustez selon vos besoins */
+}
+
+/* Style pour chaque wallet */
+
+
+.wallet-text {
+  width: 70%;
+  font-size: 20px;
+  font-family: "Kumbh Sans";
+  font-weight: 500;
+   /* Ajustez la valeur en fonction de vos besoins */
+}
+
+.participate-button {
+  width: 25vh;
+  padding: 15px 20px;
+  font-size: 30px; /* Ajustez la taille de la police si nécessaire */
+  border: none; /* Pour supprimer la bordure par défaut des boutons */
+  background-color: blue; /* Pour changer la couleur de fond du bouton */
+  color: black; /* Pour changer la couleur du texte du bouton */
+  cursor: pointer; /* Pour changer le curseur en main lorsque vous survolez le bouton */
+  border-radius: 40px; /* Pour avoir des coins arrondis sur le bouton */
+  justify-content: center;
+  align-items: center;
+  font-family: "Kumbh Sans";
+  background-color: #aad9db;
+}
+
+.participate-button:hover {
+  background-color: darkblue;
+}
+
+.wallet-item h3 {
+  font-size: 35px; /* Ou la taille que vous souhaitez */
+}
+
+.arrow-button {
+  font-size: 40px; /* Increase the font size for a bigger arrow */
+  padding: 2px 2px;
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove the border */
+  cursor: pointer;
+  color: black; /* Color of the arrow */
+}
+.arrow-button:hover {
+  color: black; /* Change the color on hover (replace 'red' with your desired color) */
+  background-color: transparent; /* Ensuring the background stays transparent on hover */
+}
