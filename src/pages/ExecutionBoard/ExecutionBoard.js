@@ -106,9 +106,10 @@ const ExecutionBoard = () => {
           </h1>
           </div>
           <div className="execution-container">
+            
             <div className="executions my">
               <h2>My Execution</h2>
-              <div className="scroll">{executionFeed}</div>
+              <div className="scroll"></div>
 
               {/* {myExecutions.map((task) => (
                 <div className="execution" key={task.id}>

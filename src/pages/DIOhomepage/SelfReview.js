@@ -16,12 +16,9 @@ const SelfReview = ({
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [difficulty, setDifficulty] = useState(0);
   const [workText, setWorkText] = useState("");
-  const [countdownValues, setCountdownValues] = useState({
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+
   const [departHours, setDepartHours] = useState(24); // Initialiser à une valeur par défaut
+  const { hours, minutes, seconds } = useCountdown(departHours);
 
   const handleDepartHours1 = (value) => {
     setDepartHours(value);
@@ -80,8 +77,6 @@ const SelfReview = ({
         .then((res) => {
           const newDepartHours = res.data.data.departHours;
           console.log(newDepartHours);
-          
-
           handleDepartHours1(newDepartHours);
           setCurrentQuestion(3);
         });
@@ -177,7 +172,7 @@ const SelfReview = ({
         <>
           <h1>CONGRATULATION !</h1>
           <p>You will see your thanks in</p>
-          <p>{`${countdownValues.hours}H:${countdownValues.minutes}Mn:${countdownValues.seconds}s`}</p>
+          <p>{`${hours}H:${minutes}Mn:${seconds}s`}</p>
           <div className="congratulations">
           <img className="lefthand" src={lefthand} />
           <button

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext , useEffect, useRef} from "react";
 
 import Sidebar from "../../Components/SidebarDIO";
 import ExecutionInProgress from "./ExecutionCard/ExecutionInProgress";
@@ -41,6 +41,16 @@ const DIOhomepage = () => {
     setCreationExecutionWorkAlreadyDone,
   ] = useState(false);
 
+  const myDivRef = useRef(null);
+  
+
+  useEffect(() => {
+    if (myDivRef.current) {
+        myDivRef.current.scrollTop = myDivRef.current.scrollHeight - myDivRef.current.clientHeight;
+    }
+  }, []);
+  
+
   const feed = dioTasks.map((execution) => {
     switch (execution.status_) {
       case "Not assigned":
@@ -75,6 +85,8 @@ const DIOhomepage = () => {
     }
   });
 
+
+
   return (
     <div className="App">
       <Sidebar />
@@ -105,10 +117,11 @@ const DIOhomepage = () => {
           </div>
 
           {/* Messaging */}
-          <div className="messaging-container">
-            <div className="scroll">
-              <div className="messages">{feed}</div>
-            </div>
+          <div className="messaging-container" >
+              <div className="messages" ref={myDivRef}         style={{
+          height: '500px', // Adjust height as needed
+          overflowY: 'scroll', // Optional, might not work in all browsers
+        }}>{feed}</div>
 
           </div>
           <ExecutionMessaging
