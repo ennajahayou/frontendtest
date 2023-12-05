@@ -19,10 +19,20 @@ const SelfReview = ({
 
   const [departHours, setDepartHours] = useState(24); // Initialiser à une valeur par défaut
   const { hours, minutes, seconds } = useCountdown(departHours);
+  const [showCountdown, setShowCountdown] = useState(true);
 
   const handleDepartHours1 = (value) => {
-    setDepartHours(value);
+    const roundedValue = Math.ceil(value);
+    setDepartHours(roundedValue);
   };
+
+  useEffect(() => {
+    if (departHours < 6) {
+      setShowCountdown(false);
+    } else {
+      setShowCountdown(true);
+    }
+  }, [departHours]);
 
 
 
@@ -75,8 +85,10 @@ const SelfReview = ({
           dataReview
         )
         .then((res) => {
-          const newDepartHours = res.data.data.departHours;
+          const newDepartHours = res.data.data.responseValue;
           console.log(newDepartHours);
+          
+
           handleDepartHours1(newDepartHours);
           setCurrentQuestion(3);
         });
@@ -112,7 +124,7 @@ const SelfReview = ({
               dataReview
             )
             .then((res) => {
-              const newDepartHours = res.data.data.departHours;
+              const newDepartHours = res.data.data.responseValue;
               console.log(newDepartHours);
               handleDepartHours1(newDepartHours);
               setCurrentQuestion(3);
@@ -171,8 +183,17 @@ const SelfReview = ({
       ) : (     
         <>
           <h1>CONGRATULATION !</h1>
+          {showCountdown ? (
+        <>
           <p>You will see your thanks in</p>
           <p>{`${hours}H:${minutes}Mn:${seconds}s`}</p>
+        </>
+      ) : (
+        <>
+          <p>You win thanks for your work</p>
+          <p>{`${departHours} Thanks`}</p>
+        </>
+      )}
           <div className="congratulations">
           <img className="lefthand" src={lefthand} />
           <button

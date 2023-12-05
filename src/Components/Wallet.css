@@ -1,11 +1,11 @@
 .wallet-item {
   font-family: "Kumbh Sans";
-  width: 770px;
-  height: 7vh;
-  margin-left: 20px;
+  width: 46.25vw;
+  height: 4.8vh;
+  margin-left: 10vw;
   border-radius: 84px;
   background-color: white; /* Espace à l'intérieur des rectangles */
-  margin-bottom: 15px;
+  margin-bottom: 1vh;
   margin-top: 0px; /* Espace entre les rectangles */
   border: 1px solid #ccc; /* Bordure autour des rectangles */
   border-radius: 20px; /* Coins arrondis */
@@ -22,30 +22,30 @@
 .row-container {
   display: flex;
   justify-content: space-between; /* Adjust as needed */
-  margin-top: 20px; /* Adjust margin as needed */
-  margin-left: 15px;
-  margin-right: 90px;
-  height: 40px;
+  margin-top: 1.4vh; /* Adjust margin as needed */
+  margin-left: 9vw;
+  margin-right: 9.2vw;
+  height: 4.8vh;
 }
 
 .symbole_th {
-  width: 20px; /* largeur de l'image */
-  height: 20px; /* hauteur de l'image */
-  margin-left: 5px; /* espace entre le texte "0" et l'image */
+  width: 2vh; /* largeur de l'image */
+  height: 2.4vh; /* hauteur de l'image */
+  margin-left: 0.5vw; /* espace entre le texte "0" et l'image */
 }
 
 
 .row-item {
   background-color: white;
-  width: 221px; /* Adjust width as needed */
-  height: 40px;
+  width: 12.8vw; /* Adjust width as needed */
+  height: 4.8vh;
   border: 1px solid #ccc; /* Example border */
   padding: 10px; /* Example padding */
   box-sizing: border-box; /* Adjust box-sizing as needed */
-  margin-left: 21px;
+  margin-left: 1.5vw;
   text-align: center;
   font-family: "Kumbh Sans";
-  margin-left: 30px;
+  margin-left: 2.5vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -55,11 +55,11 @@
 
 
 .wallet-list {
-  width: 90%; /* Fixer la largeur à 90% de la largeur du parent */
-  margin: auto;
+  width: 56.25vw; /* Fixer la largeur à 90% de la largeur du parent */
+  margin-bottom: 3vh;
   font-family: "Kumbh Sans";
   display: flex;
-  height: 20vh;
+  height: 10vh;
    /* Ajustez selon vos besoins */
 }
 
@@ -98,8 +98,9 @@
 }
 
 .arrow-button {
-  font-size: 40px; /* Increase the font size for a bigger arrow */
-  padding: 2px 2px;
+  font-size: 20px; /* Increase the font size for a bigger arrow */
+  padding: 2px;
+  margin-right: 5vw;
   background-color: transparent; /* Transparent background */
   border: none; /* Remove the border */
   cursor: pointer;

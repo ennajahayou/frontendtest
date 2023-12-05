@@ -8,11 +8,29 @@ import axios from "axios";
 import ExecutionCards from "./ExecutionCards";
 import CEOReview from "../CEOProfil/CEOReview";
 import CEOreviewPopUp from "../DIOhomepage/PopUp/CEOreviewPopUp";
+import Wallet from "../../Components/Wallet";
+import ExecutionMessaging from "../DIOhomepage/ExecutionMessaging";
+
+
+import SubmitionPopUp from "../DIOhomepage/PopUp/SubmitionPopUp";
+
+
+import WorkDonePopUp from "../DIOhomepage/PopUp/WorkDonePopUp";
+import Work from "../DIOhomepage/PopUp/Work";
+import AttributionPopUp from "../DIOhomepage/PopUp/AttributionPopUp";
+
+
+
 
 import logo5 from "../../images/logo5.png";
 
 
 const ExecutionBoard = () => {
+
+
+
+
+
   const dioId = 1;
   const [droppedTaskIndex, setDroppedTaskIndex] = useState(null);
   const [showEvaluation, setShowEvaluation] = useState(false); // Nouvel état
@@ -69,6 +87,23 @@ const ExecutionBoard = () => {
     setShowPeerReview(true);
   };
 
+
+
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [showPopUpWorkDone, setShowPopUpWorkDone] = useState(false);
+  const [showPopUpWork, setShowPopUpWork] = useState(false);
+  const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
+  const [createExecutionText, setCreateExecutionText] = useState("");
+  // const [executions, setExecutions] = useState([]);
+
+  const [executionId, setExecutionId] = useState(0);
+  const [isAttributingExecution, setIsAttributingExecution] = useState(false);
+  const [isCreatingExecution, setIsCreatingExecution] = useState(false);
+  const [
+    creationExecutionWorkAlreadyDone,
+    setCreationExecutionWorkAlreadyDone,
+  ] = useState(false);
+
   const executionFeed = myExecutions.map((execution) => (
     <ExecutionCards
       execution={execution}
@@ -101,15 +136,13 @@ const ExecutionBoard = () => {
         <div className="main-content">
           <div className="execution-board">
           <h1>Work Board</h1>
-          <h1 className="thanks">
-            1 429 690 <img className="symbole" src={logo5} />
-          </h1>
           </div>
+          <Wallet  />
           <div className="execution-container">
             
-            <div className="executions my">
-              <h2>My Execution</h2>
-              <div className="scroll"></div>
+
+              
+              
 
               {/* {myExecutions.map((task) => (
                 <div className="execution" key={task.id}>
@@ -141,68 +174,43 @@ const ExecutionBoard = () => {
                   </div>
                 </div>
               ))} */}
-            </div>
-              {localStorage.getItem("isCEO") === "1" ? (
-                <div className="executions DIO">
-                <h2 className="fini">CEO Reviews</h2>
-              <div className="scroll">  
-              {finishedTasks.map((task, index) => (
-                <div className="execution" key={index}>
-                 <div className="description"> {task.exec_description}</div>
-                  <div className="buttons-container">
-                    <button
-                      onClick={setShowPopUpCEO}
-                    >
-                      See
-                    </button>
-                    <div className={`deadline`}>
-                    {"until 24/07/2023"}
-                  </div>
-                  </div>
-                </div>
 
-              ))}
-              </div>
-                </div>
-              ) : (
-                <div className="executions DIO">
-                <h2 className="fini">Peer Reviews</h2>
-                <div className="scroll"> 
-                {executionsInReview.map((task) => (
-                  <div className="execution" key={task.id}>
-                    {task.exec_description}
-                    <div className="buttons-container">
-                      <button
-                        className="accept-button"
-                        onClick={() => setDroppedTaskIndex(task.id)}
-                      >
-                        See
-                      </button>
-                      {droppedTaskIndex === task.id && (
-                        <button
-                          className="thanks-button"
-                          onClick={() => {
-                            handlePeerReviewClick();
-                            // setDroppedTaskIndex(task.id);
-                          }}
-                        >
-                          Peer review
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  ))}
-                  </div>
-                  </div>
-              )}
-            {showPopUpCEO && (
-            <CEOreviewPopUp
-            setShowPopUpCEO={setShowPopUpCEO}
-            setCEOReview={setCeoReview}
-            setExecutionId={setCurrentExecution}
+
+          </div>
+          <ExecutionMessaging
+              createExecutionText={createExecutionText}
+              setCreateExecutionText={setCreateExecutionText}
+              setShowPopUp={setShowPopUp}
+            />
+          {/* Fin Messaging */}
+          {showPopUp && (
+            <SubmitionPopUp
+              executionDescription={createExecutionText}
+              dioId="1"
+              setShowPopUp={setShowPopUp}
+              setShowPopUpWorkDone={setShowPopUpWorkDone}
             />
           )}
-          </div>
+          {showPopUpWorkDone && (
+            <WorkDonePopUp
+              setShowPopUpWorkDone={setShowPopUpWorkDone}
+              setShowPopUpWork={setShowPopUpWork}
+            />
+          )}
+          {showPopUpWork && (
+            <Work
+              setShowPopUpWork={setShowPopUpWork}
+              setSelfReview={setCreationExecutionWorkAlreadyDone}
+              setExecutionId={setExecutionId}
+            />
+          )}
+          {showPopUpAttribution && (
+            <AttributionPopUp
+              setIsAttributingExecution={setIsAttributingExecution}
+              setShowPopUpAttribution={setShowPopUpAttribution}
+              setSelfReview={setCreationExecutionWorkAlreadyDone}
+            />
+          )}
         </div>
       )}
     </div>

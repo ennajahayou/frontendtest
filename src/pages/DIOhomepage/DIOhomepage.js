@@ -12,13 +12,12 @@ import Work from "./PopUp/Work";
 import AttributionPopUp from "./PopUp/AttributionPopUp";
 import ExecutionCreation from "./ExecutionCreation";
 import SelfReview from "./SelfReview";
+import Wallet from "../../Components/Wallet";
 
-import personna from '../../images/icones/personna.png';
 import "./DIOhomepage.css";
 
 import { TasksContext } from "../TasksContext";
 
-import logo5 from "../../images/logo5.png";
 
 const DIOhomepage = () => {
   // const dioId = 1; //TODO : add real DIO id
@@ -109,18 +108,16 @@ const DIOhomepage = () => {
       ) : (
         <div className="main-content">
           <div className="logo-bar">
-            <img className="personna" src={personna} />
             <h1>DIO Thanks and Tip</h1>
-            <h4 className="thanks">
-              1 429 690 <img className="symbole" src={logo5} />
-            </h4>
           </div>
+          <Wallet  />
 
           {/* Messaging */}
           <div className="messaging-container" >
               <div className="messages" ref={myDivRef}         style={{
-          height: '500px', // Adjust height as needed
-          overflowY: 'scroll', // Optional, might not work in all browsers
+          height: '55vh', // Adjust height as needed
+          overflowY: 'scroll',
+          marginBottom:'0px' // Optional, might not work in all browsers
         }}>{feed}</div>
 
           </div>
