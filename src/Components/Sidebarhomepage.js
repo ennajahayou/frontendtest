@@ -9,7 +9,9 @@ import logo from "../images/logo.png";
 const Sidebar = () => (
   <div className="sidebarhome">
     <div className="sidebar-section-image">
+    <Link to="/Homepage">
     <img className="image_bar" src={logo} alt="Logo"  />
+    </Link> 
     </div>
     <button className="sidebar-section">My DIOs</button>
     <button className="sidebar-section">Create a new DIO</button>
