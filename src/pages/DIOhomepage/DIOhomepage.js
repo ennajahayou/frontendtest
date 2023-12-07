@@ -123,7 +123,7 @@ const DIOhomepage = () => {
           height: '55vh', // Adjust height as needed
           overflowY: 'scroll',
           marginBottom:'0px' // Optional, might not work in all browsers
-        }}>{feed}</div>
+        }}>{feed.reverse()}</div>
 
           </div>
           <ExecutionMessaging
