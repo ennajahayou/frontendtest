@@ -24,38 +24,36 @@ function Sidebar  () {
    return (
   <div className="sidebar">
     <div className="sidebar-section-image">
+    <Link to="/Homepage">
     <img className="image_bar" src={logo} alt="Logo"  />
+    </Link>
     </div>
     <button className="sidebar-section">
       <Link to="/DIO">
-       <img src={message} />My feed
+       <img className="icon" src={message} />My Feed
        </Link>
     </button>
-    {localStorage.getItem("isCEO") === "1" ? (
-    <button className="sidebar-section">  
-       <Link to="/CEOProfil">
-       <img src={star}  />CEO Profile        
-       </Link>       
-    </button>
-    ) : (<button className="sidebar-section">  <img src={star}  />  CEO Profile  </button> )}
     <button className="sidebar-section">
        <Link to="/ExecutionBoard">
-       <img src={story}  />Work Board
+       <img src={story}  />My Work Board
        </Link>
     </button>
     <button className="sidebar-section">
-        <img src={idee}  />Push an idea
+        <img src={idee}  />Push an Idea
     </button>
     <button className="sidebar-section">
-        <img src={poignee}  />Co-opt talent
+        <img src={poignee}  />Co-opt Talent
     </button>
     <button className="sidebar-section">
        <Link to="/Archives">
-        <img src={archiver}  />DIO feed
+        <img src={archiver}  />My Archives
         </Link>
     </button>
+    <button className="sidebar-section">
+       <img src={poignee}  />CEO Prerogatives 
+    </button>
     <div className="sidebar-section espace"></div>
-    <button className="sidebar-section">DIO settings</button>
+    <button className="sidebar-section"><img   />My Settings</button>
   </div>
    )
 };

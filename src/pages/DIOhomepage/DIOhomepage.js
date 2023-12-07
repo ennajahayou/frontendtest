@@ -1,5 +1,6 @@
 import { useState, useContext , useEffect, useRef} from "react";
 
+
 import Sidebar from "../../Components/SidebarDIO";
 import ExecutionInProgress from "./ExecutionCard/ExecutionInProgress";
 import ExecutionInReview from "./ExecutionCard/ExecutionInReview";
@@ -107,10 +108,14 @@ const DIOhomepage = () => {
         />
       ) : (
         <div className="main-content">
+                  <Wallet  />
           <div className="logo-bar">
             <h1>DIO Thanks and Tip</h1>
           </div>
-          <Wallet  />
+          <div  className="barre-reche">
+            <input placeholder="Barre de recherche"></input>
+          </div>
+  
 
           {/* Messaging */}
           <div className="messaging-container" >

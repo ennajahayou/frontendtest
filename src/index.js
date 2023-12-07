@@ -31,8 +31,10 @@ import SignupPage from "./pages/signup";
 import UserDetails from "./pages/UserDetails/UserDetails";
 import Parameters from "./pages/Parameters/Parameters";
 import LoginA from "./pages/loginA";
+import Myprofile from "./pages/Myprofile";
 
 import { TasksProvider } from "./pages/TasksContext";
+
 
 export default function App() {
   return (
@@ -49,6 +51,7 @@ export default function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="loginA" element={<LoginA />} />
           <Route path="signup" element={<SignupPage />} />
+          <Route path="Myprofile" element={<Myprofile />} />
           <Route path="UserDetails" element={<UserDetails />} />
           <Route path="Parameters" element={<Parameters />} />
         </Routes>

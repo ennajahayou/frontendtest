@@ -134,15 +134,12 @@ const ExecutionBoard = () => {
         />
       ) : (
         <div className="main-content">
+                    <Wallet  />
           <div className="execution-board">
-          <h1>Work Board</h1>
+          <h1>DIO Thanks and Tip</h1>
           </div>
-          <Wallet  />
-          <div className="execution-container">
-            
 
-              
-              
+          <div className="execution-container">
 
               {/* {myExecutions.map((task) => (
                 <div className="execution" key={task.id}>

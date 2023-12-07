@@ -8,7 +8,7 @@ import personna from '../images/icones/personna.png';
 import logo from "../images/logo.png";
 const Sidebar = () => (
   <div className="sidebarhome">
-    <div className="sidebar-section">
+    <div className="sidebar-section-image">
     <img className="image_bar" src={logo} alt="Logo"  />
     </div>
     <button className="sidebar-section">My DIOs</button>
@@ -20,7 +20,7 @@ const Sidebar = () => (
     <button className="sidebar-section">Invite New Member</button>
     <div className="sidebar-section espace"></div>
     <button className="sidebar-section">
-      <Link to="/login"><img src={personna} />My profile : {localStorage.getItem("userName")}</Link>
+      <Link to="/Myprofile"><img src={personna} />My profile : {localStorage.getItem("userName")}</Link>
     </button>
   </div>
 );

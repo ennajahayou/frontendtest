@@ -1,3 +1,13 @@
+.wallet-list {
+  width: 56.25vw; /* Fixer la largeur à 90% de la largeur du parent */
+  margin-bottom: 1.5vh;
+  font-family: "Kumbh Sans";
+  display: flex;
+  height: 10vh;
+  margin-top: 1.5vh;
+   /* Ajustez selon vos besoins */
+}
+
 .wallet-item {
   font-family: "Kumbh Sans";
   width: 46.25vw;
@@ -22,18 +32,11 @@
 .row-container {
   display: flex;
   justify-content: space-between; /* Adjust as needed */
-  margin-top: 1.4vh; /* Adjust margin as needed */
+  margin-top: 1vh; /* Adjust margin as needed */
   margin-left: 9vw;
   margin-right: 9.2vw;
   height: 4.8vh;
 }
-
-.symbole_th {
-  width: 2vh; /* largeur de l'image */
-  height: 2.4vh; /* hauteur de l'image */
-  margin-left: 0.5vw; /* espace entre le texte "0" et l'image */
-}
-
 
 .row-item {
   background-color: white;
@@ -53,54 +56,22 @@
   font-weight: bold;
 }
 
-
-.wallet-list {
-  width: 56.25vw; /* Fixer la largeur à 90% de la largeur du parent */
-  margin-bottom: 3vh;
-  font-family: "Kumbh Sans";
-  display: flex;
-  height: 10vh;
-   /* Ajustez selon vos besoins */
+.symbole_th {
+  width: 2vh; /* largeur de l'image */
+  height: 2.4vh; /* hauteur de l'image */
+  margin-left: 0.5vw; /* espace entre le texte "0" et l'image */
 }
 
-/* Style pour chaque wallet */
-
-
-.wallet-text {
-  width: 70%;
-  font-size: 20px;
-  font-family: "Kumbh Sans";
-  font-weight: 500;
-   /* Ajustez la valeur en fonction de vos besoins */
-}
-
-.participate-button {
-  width: 25vh;
-  padding: 15px 20px;
-  font-size: 30px; /* Ajustez la taille de la police si nécessaire */
-  border: none; /* Pour supprimer la bordure par défaut des boutons */
-  background-color: blue; /* Pour changer la couleur de fond du bouton */
-  color: black; /* Pour changer la couleur du texte du bouton */
-  cursor: pointer; /* Pour changer le curseur en main lorsque vous survolez le bouton */
-  border-radius: 40px; /* Pour avoir des coins arrondis sur le bouton */
-  justify-content: center;
-  align-items: center;
-  font-family: "Kumbh Sans";
-  background-color: #aad9db;
-}
-
-.participate-button:hover {
-  background-color: darkblue;
-}
-
-.wallet-item h3 {
-  font-size: 35px; /* Ou la taille que vous souhaitez */
+.wallet-list h4{
+  margin-top: 1.5vh;
+  margin-bottom: 0vh;
 }
 
 .arrow-button {
-  font-size: 20px; /* Increase the font size for a bigger arrow */
+  font-size: 3vh; /* Increase the font size for a bigger arrow */
   padding: 2px;
   margin-right: 5vw;
+  margin-top: 1.5vh ;
   background-color: transparent; /* Transparent background */
   border: none; /* Remove the border */
   cursor: pointer;
@@ -110,3 +81,4 @@
   color: black; /* Change the color on hover (replace 'red' with your desired color) */
   background-color: transparent; /* Ensuring the background stays transparent on hover */
 }
+

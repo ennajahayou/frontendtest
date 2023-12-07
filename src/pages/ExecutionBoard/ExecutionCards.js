@@ -4,6 +4,7 @@ import ExecutionInReview from "./ExecutionCards/ExecutionInReview";
 import ExecutionNotAssigned from "./ExecutionCards/ExecutionNotAssigned";
 import ExecutionNotValidated from "./ExecutionCards/ExecutionNotValidated";
 
+
 const ExecutionCards = ({
   execution,
   handleDropClick,
