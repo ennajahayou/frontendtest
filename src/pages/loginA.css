@@ -9,6 +9,13 @@
     flex-direction: 'column';
 }
 
+.loginB{
+
+    width: 100%;
+    height: 95vh;
+}
+
+
 .logo{
     width: 100%;
     height: 40%;
@@ -34,15 +41,17 @@
 
 .deconnexion{
     background-color:  white;
-    width: 18%;
-    height: 8%;
+    width: 25%;
+    height: 20%;
     justify-content: center;
     align-items: center;
     color: black;
-    margin-left: 40%;
+    margin-left: 0%;
     border-radius: 20px;
     font-family: "Kumbh Sans";
-    margin-top: 10vh;
+    margin-top: 60%;
+    padding: 5%;
+    display: flex;
 }
 
 .deconnexion:hover{
