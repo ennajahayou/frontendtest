@@ -1,4 +1,4 @@
-import "../DIOhomepage.css";
+import "./PopupFeed.css";
 
 import axios from "axios";
 

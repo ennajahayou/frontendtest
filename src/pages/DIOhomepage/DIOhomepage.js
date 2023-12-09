@@ -2,9 +2,9 @@ import { useState, useContext , useEffect, useRef} from "react";
 
 
 import Sidebar from "../../Components/SidebarDIO";
-import ExecutionInProgress from "./ExecutionCard/ExecutionInProgress";
-import ExecutionInReview from "./ExecutionCard/ExecutionInReview";
-import ExecutionNotAssigned from "./ExecutionCard/ExecutionNotAssigned";
+import ExecutionInProgress from "./FeedCard/ExecutionInProgress";
+import ExecutionInReview from "./FeedCard/ExecutionInReview";
+import ExecutionNotAssigned from "./FeedCard/ExecutionNotAssigned";
 import SubmitionPopUp from "./PopUp/SubmitionPopUp";
 import ExecutionMessaging from "./ExecutionMessaging";
 import ExecutionAttribution from "./ExecutionAttribution";

@@ -1,4 +1,4 @@
-import "../DIOhomepage.css";
+import "./PopupFeed.css";
 // import { useContext } from "react";
 // import { TasksContext } from "../../TasksContext";
 

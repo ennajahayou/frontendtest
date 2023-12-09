@@ -9,6 +9,7 @@
     font-family: 'Kumbh Sans', sans-serif;
 }
 
+
 .image_bar {
   /* Assurez-vous que la div parente est positionnée relativement */
   position: relative;
@@ -54,7 +55,30 @@
     font-size: 170%;
 }
 
-
+.sidebar-section-link {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  border-bottom: none; /* Remove the line below the text */
+  background-color: transparent; 
+  border: none; 
+  color: white; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
+  font-family: 'Kumbh Sans', sans-serif;
+  width: 24.84vw;	
+  height: 12vh;
+  flex-basis: 1;
+  background-color: #63798a;
+  font-size: 170%;
+}
+.sidebar-section-link > span {
+  border-bottom: none; /* Remove the line below the text */
+}
+.sidebar-section-link,
+.sidebar-section-link > * {
+  text-decoration: none; /* Remove text underline */
+}
 
 
 .sidebar-section img{
@@ -62,6 +86,7 @@
 }
 .sidebar-section text{
   margin-left: 4vw;
+  border-bottom: none;
 }
 
 .sidebar-section:hover {
@@ -74,7 +99,26 @@
 .sidebar-section:last-child {
     border-bottom: none;
 }
-*/
+
+
+.sidebar-section-link img{
+  margin-left: 2vw;
+}
+.sidebar-section-link text{
+  margin-left: 4vw;
+}
+
+.sidebar-section-link:hover {
+  color: white; /* Change the color on hover (replace 'red' with your desired color) */
+  background-color: gray;
+  border: 1px solid white; /* Ensuring the background stays transparent on hover */
+}
+
+
+.sidebar-section-link:last-child {
+    border-bottom: none;
+}
+
 
 /* Le conteneur de la barre latérale */
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import "../DIOhomepage.css";
+import "./Work.css";
 
 const SubmitionPopUp = ({
   setShowPopUpWork,

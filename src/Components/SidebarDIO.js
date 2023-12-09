@@ -25,30 +25,25 @@ function Sidebar  () {
   <div className="sidebar">
     <div className="sidebar-section-image">
     <Link to="/Homepage">
-    <img className="image_bar" src={logo} alt="Logo"  />
+       <img className="image_bar" src={logo} alt="Logo"  />
     </Link>
     </div>
-    <button className="sidebar-section">
-      <Link to="/DIO">
-       <img className="icon" src={message} />My Feed
-       </Link>
-    </button>
-    <button className="sidebar-section">
-       <Link to="/ExecutionBoard">
+   <Link to="/DIO" className="sidebar-section-link">
+       <img className="icon" src={message} /><span>My Feed</span>
+   </Link>
+   <Link to="/ExecutionBoard" className="sidebar-section-link">
        <img src={story}  />My Work Board
-       </Link>
-    </button>
-    <button className="sidebar-section">
+   </Link>
+    <Link className="sidebar-section-link">
         <img src={idee}  />Push an Idea
-    </button>
+    </Link>
     <button className="sidebar-section">
         <img src={poignee}  />Co-opt Talent
     </button>
-    <button className="sidebar-section">
-       <Link to="/Archives">
+       <Link to="/Archives" className="sidebar-section-link">
         <img src={archiver}  />My Archives
         </Link>
-    </button>
+
     <button className="sidebar-section">
        <img src={poignee}  />CEO Prerogatives 
     </button>
