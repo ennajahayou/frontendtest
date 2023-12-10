@@ -7,6 +7,8 @@ const SubmitionPopUp = ({
   setIsCreatingExecution,
   setSelfReview,
   setExecutionId,
+  workText,
+  setWorkText
 }) => {
   // TODO: add real information in jsonData
 
@@ -15,7 +17,6 @@ const SubmitionPopUp = ({
     setSelfReview(true);
     setExecutionId(0);
   };
-  const [workText, setWorkText] = useState("");
 
 
 

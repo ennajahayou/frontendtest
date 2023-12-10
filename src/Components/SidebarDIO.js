@@ -34,21 +34,22 @@ function Sidebar  () {
    <Link to="/ExecutionBoard" className="sidebar-section-link">
        <img src={story}  />My Work Board
    </Link>
-    <Link className="sidebar-section-link">
+    <Link to="/Idea" className="sidebar-section-link">
         <img src={idee}  />Push an Idea
     </Link>
-    <button className="sidebar-section">
+    <Link to="/Co-opt" className="sidebar-section-link">
         <img src={poignee}  />Co-opt Talent
-    </button>
+    </Link>
        <Link to="/Archives" className="sidebar-section-link">
         <img src={archiver}  />My Archives
         </Link>
-
-    <button className="sidebar-section">
+    <Link to="/CEOprerogatives" className="sidebar-section-link">
        <img src={poignee}  />CEO Prerogatives 
-    </button>
+    </Link>
     <div className="sidebar-section espace"></div>
-    <button className="sidebar-section"><img   />My Settings</button>
+    <button className="sidebar-section">
+      <img/>My Settings
+      </button>
   </div>
    )
 };

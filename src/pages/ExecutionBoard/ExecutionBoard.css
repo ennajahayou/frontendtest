@@ -177,18 +177,7 @@ h1 {
   /* Autres styles selon vos besoins */
 }
 
-.evaluation-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  background-color: white ;
-  border-radius: 20px;
-  width: 120vh;
-  height: 80vh;
-  margin: 0 auto;
-  font-family: 'Kumbh Sans', sans-serif;
-}
+
 
 .evaluation-textarea{
   display: flex;
@@ -209,13 +198,7 @@ h1 {
   color: black;
   align-items: left ;
 }
-.evaluation-container h2 {
-  margin-top: 10vh;
-  font-size: 30px;
-  margin-bottom: 30px;
-  background-color: white;
-  color: black;
-}
+
 
 .evaluation-button1 {
   background-color: #a8d5e2;
@@ -230,55 +213,6 @@ h1 {
   width: 20%;
   margin-left: 50%;
 }
-
-.evaluation-button {
-  background-color:  #92C5BB;
-  border: none;
-  border-radius: 25px;
-  color: white  ;
-  padding: 10px 30px;
-  margin: 10px 0;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
-  width: 50%;
-}
-
-.congratulations{
-  display: flex;
-  flex-direction: row;
-  width: 110%;
-  height: 60vh;
-  margin-top: 0%;
-}
-.righthand{
-  margin-left: 5%;
-  width: 50%;
-  height: 20vh;
-  margin-top: 5%;
-}
-.lefthand{
-  margin-right: 5%;
-  width: 50%;
-  height: 20vh;
-  margin-top: 5%;
-}
-
-.backtofeed-button {
-  background-color:  #92C5BB;
-  border: none;
-  border-radius: 25px;
-  color: black  ;
-  cursor: pointer;
-  font-size: 150%;
-  font-weight: 500;
-  transition: 0.3s;
-  width: 200%;
-  height: 8vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  margin-top: 10%;
-}
-
 
 .evaluation-button:hover {
   background-color: #8bc4d0;

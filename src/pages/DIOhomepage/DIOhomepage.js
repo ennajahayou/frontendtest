@@ -3,7 +3,7 @@ import { useState, useContext , useEffect, useRef} from "react";
 
 import Sidebar from "../../Components/SidebarDIO";
 import ExecutionInProgress from "./FeedCard/ExecutionInProgress";
-import ExecutionInReview from "./FeedCard/ExecutionInReview";
+import ExecutionInReview from "./FeedCard/ExecutionSelfPerfo";
 import ExecutionNotAssigned from "./FeedCard/ExecutionNotAssigned";
 import SubmitionPopUp from "./PopUp/SubmitionPopUp";
 import ExecutionMessaging from "./ExecutionMessaging";
@@ -14,6 +14,7 @@ import AttributionPopUp from "./PopUp/AttributionPopUp";
 import ExecutionCreation from "./ExecutionCreation";
 import SelfReview from "./SelfReview";
 import Wallet from "../../Components/Wallet";
+import PeerReview from "../ExecutionBoard/PeerReview";
 
 import "./DIOhomepage.css";
 
@@ -32,6 +33,7 @@ const DIOhomepage = () => {
   const [showPopUpWork, setShowPopUpWork] = useState(false);
   const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
   const [createExecutionText, setCreateExecutionText] = useState("");
+  const [WorkText, setWorkText] = useState("");
   // const [executions, setExecutions] = useState([]);
   const [executionId, setExecutionId] = useState(0);
   const [isAttributingExecution, setIsAttributingExecution] = useState(false);
@@ -49,9 +51,15 @@ const DIOhomepage = () => {
         myDivRef.current.scrollTop = myDivRef.current.scrollHeight - myDivRef.current.clientHeight;
     }
   }, []);
+
+  const [showPeerReview, setShowPeerReview] = useState(false);
+
+  const handlePeerReviewClick = () => {
+    setShowPeerReview(true);
+  };
   
 
-  const feed = dioTasks.map((execution) => {
+  const feed = dioTasks.map((execution ) => {
     switch (execution.status_) {
       case "Not assigned":
         return (
@@ -78,8 +86,24 @@ const DIOhomepage = () => {
             id={execution.id}
             description={execution.exec_description}
             talent={execution.talent_name}
+            status={execution.status_}
+            selfDifficulty ={execution.difficulty}
+            selfReactivity ={execution.reactivity}
           />
         );
+      case "Achieved":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.comments_}
+              selfDifficulty ={execution.difficulty}
+              selfReactivity ={execution.reactivity}
+              clickreview={handlePeerReviewClick}
+            />
+          );
       default:
         return <></>;
     }
@@ -105,7 +129,13 @@ const DIOhomepage = () => {
           executionDescription={createExecutionText}
           setShowEvaluation={setCreationExecutionWorkAlreadyDone}
           executionId={executionId}
-        />
+          executionComment={WorkText}
+        />):
+        showPeerReview ? (
+          <PeerReview
+            executionId={executionId}
+            setShowPeerReview={setShowPeerReview}
+          />
       ) : (
         <div className="main-content">
                   <Wallet  />
@@ -151,6 +181,9 @@ const DIOhomepage = () => {
               setShowPopUpWork={setShowPopUpWork}
               setSelfReview={setCreationExecutionWorkAlreadyDone}
               setExecutionId={setExecutionId}
+              WorkText={WorkText}
+              setWorkText={setWorkText}
+
             />
           )}
           {showPopUpAttribution && (

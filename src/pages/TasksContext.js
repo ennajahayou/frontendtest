@@ -11,10 +11,9 @@ export const TasksProvider = ({ children }) => {
   const [dioTasks, setDIOTasks] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_BACKEND_URL + "/DIO/execution?dioId=" + dioId)
+      axios.get(process.env.REACT_APP_BACKEND_URL + "/DIO/execution?dioId=" + dioId)
       .then((res) => {
-        setDIOTasks(res.data);
+        setDIOTasks(res.data.combinedData);
       });
   }, []);
   const [propositions, setPropositions] = useState([]);

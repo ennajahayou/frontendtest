@@ -1,4 +1,4 @@
-import "../ExecutionBoard/ExecutionBoard.css";
+import "./SelfReview.css";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { TasksContext } from "../TasksContext";
@@ -12,6 +12,7 @@ const SelfReview = ({
   executionDescription,
   setShowEvaluation,
   executionId,
+  executionComment
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [difficulty, setDifficulty] = useState(0);
@@ -33,9 +34,6 @@ const SelfReview = ({
       setShowCountdown(true);
     }
   }, [departHours]);
-
-
-
 
   /*useEffect(() => {
     if (currentQuestion === 3) {
@@ -64,17 +62,19 @@ const SelfReview = ({
 
   const { addProposition } = useContext(TasksContext);
 
+
   const handleDifficultyClick = (index) => {
     setDifficulty(index);
     setCurrentQuestion(1);
   };
 
   const handleSubmit = (index) => {
+    var statut = "In review"
     if (executionId !== 0) {
       const dataReview = {
         userId: localStorage.getItem("userId"),
         executionId: executionId,
-        comment: "test",
+        comment:   executionComment,
         difficulty: difficulty,
         reactivity: index,
       };
@@ -87,8 +87,6 @@ const SelfReview = ({
         .then((res) => {
           const newDepartHours = res.data.data.responseValue;
           console.log(newDepartHours);
-          
-
           handleDepartHours1(newDepartHours);
           setCurrentQuestion(3);
         });
@@ -99,25 +97,24 @@ const SelfReview = ({
         execContent: "Work already done",
       });
     } else {
-      const data = {
-        userId: localStorage.getItem("userId"),
-        executionDescription: executionDescription,
-        dioId: 1,
-        texte: workText,
-      };
-
       axios
-        .post(process.env.REACT_APP_BACKEND_URL + "/execution/workDone", data)
+        .post(process.env.REACT_APP_BACKEND_URL + "/execution/workDone", {
+          userId: localStorage.getItem("userId"),
+          executionDescription: executionDescription,
+          dioId: 1,
+          texte: workText,
+          status:'In review'
+        })
         .then((res) => {
           addProposition(executionDescription);
+          const executionId = res.data.insertId;
           const dataReview = {
             userId: localStorage.getItem("userId"),
-            executionId: res.data.insertId,
-            comment: "test",
+            executionId: executionId,
+            comment:   executionComment,
             difficulty: difficulty,
             reactivity: index,
           };
-
           axios
             .post(
               process.env.REACT_APP_BACKEND_URL + "/review/selfReview",
@@ -125,12 +122,21 @@ const SelfReview = ({
             )
             .then((res) => {
               const newDepartHours = res.data.data.responseValue;
-              console.log(newDepartHours);
               handleDepartHours1(newDepartHours);
+              let updatedStatut = "In review";
+              if (newDepartHours < 6) {
+                updatedStatut = "Achieved";
+              }
+              console.log(newDepartHours ,updatedStatut)
               setCurrentQuestion(3);
-            }
-            );
-        });
+              axios
+              .post(process.env.REACT_APP_BACKEND_URL + "/execution/updateStatus",
+              {executionId ,updatedStatut})
+
+      }
+      );
+      });
+
     }
   };
 

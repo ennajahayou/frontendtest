@@ -59,7 +59,7 @@ export default function App() {
           <Route path="UserDetails" element={<UserDetails />} />
           <Route path="Parameters" element={<Parameters />} />
           <Route path="CEOprerogatives" element={<CEOprerogatives />} />
-          <Route path="Coopt" element={<Coopt />} />
+          <Route path="Co-opt" element={<Coopt />} />
           <Route path="Idea" element={<Idea />} />
         </Routes>
       </BrowserRouter>
