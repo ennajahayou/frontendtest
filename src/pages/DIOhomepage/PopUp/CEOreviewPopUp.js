@@ -5,6 +5,8 @@ import "./CEOreviewPopUp.css";
 const CEOreviewPopUp = ({
   setShowPopUpCEO,
   setCEOReview,
+  comments,
+  setComments,
   setExecutionId,
 
 }) => {
@@ -20,7 +22,6 @@ const CEOreviewPopUp = ({
   const handleClickEvaluate = () => {
     setShowPopUpCEO(false);
     setCEOReview(true);
-    setExecutionId(0);
   };
 
 
@@ -36,6 +37,8 @@ const CEOreviewPopUp = ({
     <input
       className="evaluation-textarea"
       placeholder="Commentaire..."
+      value={comments}
+      onChange={(e) => setComments(e.target.value)}
     />
     </div>
     <div className="container-button-ceo">

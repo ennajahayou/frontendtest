@@ -3,7 +3,7 @@ import "./ExecutionBoard.css";
 // import Sidebar from "../../../Components/Sidebar";
 import Sidebar from "../../Components/SidebarDIO.js";
 import PeerReview from "./PeerReview";
-import SelfReview from "./SelfReview";
+import SelfReview from "../DIOhomepage/SelfReview";
 import axios from "axios";
 import CEOReview from "../CEOProfil/CEOReview";
 import Wallet from "../../Components/Wallet";
@@ -112,7 +112,7 @@ const ExecutionBoard = () => {
             showceopop={setShowPopUpCEO}
           />
         );
-      case "Achieved":
+        case "Achieved":
           return (
             <ExecutionInReview
               id={execution.id}
@@ -168,15 +168,24 @@ const ExecutionBoard = () => {
           <h1>DIO Thanks and Tip</h1>
           <div>
         {/* Select button to choose status */}
+
+          {localStorage.getItem("isCEO") === "1" ? (   
         <select value={selectedStatus} onChange={handleStatusChange}>
-          <option value="All">All</option>
-          <option value="Not assigned">Not assigned</option>
-          <option value="In progress">In progress</option>
-          <option value="In review">In review</option>
+        <option value="All">All</option>
+        <option value="Not assigned">My Ongoing</option>
+        <option value="In review">Peer Reviews</option>
+        <option value="In progress">Execution Authorization</option>
         </select>
+        ) : (
+          <select value={selectedStatus} onChange={handleStatusChange}>
+          <option value="All">All</option>
+          <option value="Not assigned">My Ongoing</option>
+          <option value="In review">Peer Reviews</option>
+          </select>
+      )}
+
       </div>
           </div>
-
           <div className="execution-container">
           <div className="messages" ref={myDivRef}         style={{
           height: '55vh', // Adjust height as needed

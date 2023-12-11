@@ -37,6 +37,9 @@ const DIOhomepage = () => {
   const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
   const [createExecutionText, setCreateExecutionText] = useState("");
   const [WorkText, setWorkText] = useState("");
+  const [CommentCEO, setCommentCEO] = useState("");
+
+  let [currentExecution, setCurrentExecution] = useState(null);
 
   const [showPopUpCEO, setShowPopUpCEO] = useState(false);
   const [ceoReview, setCeoReview] = useState(false);
@@ -62,7 +65,10 @@ const DIOhomepage = () => {
   const handlePeerReviewClick = () => {
     setShowPeerReview(true);
   };
-  
+  let handleCEOReview = (executionId) => {
+    setCurrentExecution(executionId); // Set the ID of the execution card clicked
+    setShowPopUpCEO(true); // Toggle the CEO review popup
+  };
 
   const feed = dioTasks.map((execution ) => {
     switch (execution.status_) {
@@ -96,19 +102,34 @@ const DIOhomepage = () => {
             selfDifficulty ={execution.difficulty}
             selfReactivity ={execution.reactivity}
             clickreview={handlePeerReviewClick}
-            showceopop={setShowPopUpCEO}
+            showceopop={() => handleCEOReview(execution.id) }
+            currentExecution={() =>{ setCurrentExecution(execution.id)}}
           />
         );
+        case "Achieved":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.comments_}
+              selfDifficulty ={execution.difficulty}
+              selfReactivity ={execution.reactivity}
+              clickreview={handlePeerReviewClick}
+              showceopop={() => handleCEOReview(execution.id) }
+              currentExecution={() =>{ setCurrentExecution(execution.id)}}
+            />
+          );
       default:
         return <></>;
     }
   });
 
-
-
   return (
     <div className="App">
       <Sidebar />
+      
       {isAttributingExecution ? (
         <ExecutionAttribution
           executionId={executionId}
@@ -133,8 +154,9 @@ const DIOhomepage = () => {
           />
       ) : ceoReview ? (
         <CEOReview
-          executionId={executionId}
+          executionId={currentExecution}
           setShowEvaluation={setCeoReview}
+          comments={CommentCEO}
         /> 
       ): (
         <div className="main-content">
@@ -193,13 +215,15 @@ const DIOhomepage = () => {
               setSelfReview={setCreationExecutionWorkAlreadyDone}
             />
           )}
-          {showPopUpCEO && (
+          {showPopUpCEO && ( 
            <CEOreviewPopUp
            setShowPopUpCEO={setShowPopUpCEO}
            setCEOReview={setCeoReview}
-           setExecutionId={setExecutionId}
+           comments={CommentCEO}
+           setComments={setCommentCEO}
            />
       )}
+      {showPopUpCEO && ( console.log(currentExecution) )}
         </div>
       )}
     </div>

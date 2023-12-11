@@ -10,13 +10,13 @@ const useCountdown = (departHours = 24) => {
 
   useEffect(() => {
     let interval;
-    let startTime = localStorage.getItem('countdownStartTime');
+    //let startTime = localStorage.getItem('countdownStartTime');
 
     // Si le temps initial n'est pas dans le stockage local, l'initialiser
-    if (!startTime) {
-      startTime = Date.now();
+
+      let startTime = Date.now();
       localStorage.setItem('countdownStartTime', startTime);
-    }
+
 
     const endTime = parseInt(startTime, 10) + departHours * 3600 * 1000;
   

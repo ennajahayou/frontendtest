@@ -4,23 +4,27 @@ import "./ExecutionSelfPerfo.css";
 import personna from '../../../images/icones/personna.png';
 import useCountdown from "./../useCountdown";
 
-const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,selfReactivity,clickreview ,showceopop}) => {
+const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,selfReactivity,clickreview ,showceopop,currentExecution}) => {
   const DEADLINES = {
     DEAD1: 24,
     DEAD2: 48,
     DEAD3: 72,
   };
+  const ExC =0.1
+  const ExCP =0.05
 
   let departHours =24; // Initialiser à une valeur par défaut
 
   const [showCountdown, setShowCountdown] = useState(true);
+  const [showThanks, setShowThanks] = useState(true);
   
   const difficulty =['Easy','Challenging','Hard','Very hard']
   const reactivity =[ 'Cool','On the Spot', 'Over expectation' ,'Prodigious']
   const values = [1, 4, 10, 20]
   departHours=values[selfDifficulty]*values[selfReactivity]
+  departHours=Math.ceil(departHours*(1 + ExC + ExCP))
 
-  if (departHours > 4) {
+  if (departHours > 6) {
     if ((values[selfDifficulty] === 4 && values[selfReactivity] === 4)) {
       departHours = DEADLINES.DEAD1;
     } else if (values[selfDifficulty] === 10 || values[selfReactivity] === 10) {
@@ -34,8 +38,10 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   useEffect(() => {
     if (departHours < 6) {
       setShowCountdown(false);
+      setShowThanks(true);
     } else {
       setShowCountdown(true);
+      setShowThanks(false);
     }
   }, [departHours]);
 
@@ -78,7 +84,16 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <div className="right">
         <img className="profile" src={personna} />
         <div className="name"> Performer :{talent} </div>
-        <div className="thanks-score">Thanks score</div>
+        <div className="thanks-score">
+        {showThanks ? (
+        <>
+          <p>Thanks : {departHours}</p>
+        </>
+      ) : (
+        <>
+          <p>Thanks : not yet</p>
+        </>
+      )}</div>
 
       </div>
       </div>
@@ -109,13 +124,16 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         <div>Anonyme Peer review 2 Feedback with Choice on Result and Reactivity</div>
         <div>Anonyme Peer review n Feedback with Choice on Result and Reactivity</div>
       </div>
+      <div className="ceo-eval">
+        <div>CEO Evaluation Feedback with Choice on Result and Reactivity</div>
+      </div>
       </div>
       )}
       <button onClick={toggleDetails}>
         {showDetails ? '-' : '+'}
       </button>
       {localStorage.getItem("isCEO") === "1" ? (   
-      <button className="review"  onClick={showceopop}>CEO Evaluation</button>
+      <button className="review"  onClick={() => showceopop(id)}>CEO Evaluation</button>
         ) : (
       <button className="review"  onClick={clickreview}>Make a review</button>
       )}
