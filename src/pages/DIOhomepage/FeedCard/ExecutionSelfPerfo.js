@@ -4,7 +4,7 @@ import "./ExecutionSelfPerfo.css";
 import personna from '../../../images/icones/personna.png';
 import useCountdown from "./../useCountdown";
 
-const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,selfReactivity,clickreview}) => {
+const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,selfReactivity,clickreview ,showceopop}) => {
   const DEADLINES = {
     DEAD1: 24,
     DEAD2: 48,
@@ -114,7 +114,11 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <button onClick={toggleDetails}>
         {showDetails ? '-' : '+'}
       </button>
+      {localStorage.getItem("isCEO") === "1" ? (   
+      <button className="review"  onClick={showceopop}>CEO Evaluation</button>
+        ) : (
       <button className="review"  onClick={clickreview}>Make a review</button>
+      )}
       </div>
     </div>
 

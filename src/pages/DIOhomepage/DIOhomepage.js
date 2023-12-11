@@ -16,6 +16,9 @@ import SelfReview from "./SelfReview";
 import Wallet from "../../Components/Wallet";
 import PeerReview from "../ExecutionBoard/PeerReview";
 
+import CEOReview from "../CEOProfil/CEOReview";
+import CEOreviewPopUp from "../DIOhomepage/PopUp/CEOreviewPopUp";
+
 import "./DIOhomepage.css";
 
 import { TasksContext } from "../TasksContext";
@@ -34,7 +37,9 @@ const DIOhomepage = () => {
   const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
   const [createExecutionText, setCreateExecutionText] = useState("");
   const [WorkText, setWorkText] = useState("");
-  // const [executions, setExecutions] = useState([]);
+
+  const [showPopUpCEO, setShowPopUpCEO] = useState(false);
+  const [ceoReview, setCeoReview] = useState(false);
   const [executionId, setExecutionId] = useState(0);
   const [isAttributingExecution, setIsAttributingExecution] = useState(false);
   const [isCreatingExecution, setIsCreatingExecution] = useState(false);
@@ -87,23 +92,13 @@ const DIOhomepage = () => {
             description={execution.exec_description}
             talent={execution.talent_name}
             status={execution.status_}
+            comments={execution.comments_}
             selfDifficulty ={execution.difficulty}
             selfReactivity ={execution.reactivity}
+            clickreview={handlePeerReviewClick}
+            showceopop={setShowPopUpCEO}
           />
         );
-      case "Achieved":
-          return (
-            <ExecutionInReview
-              id={execution.id}
-              description={execution.exec_description}
-              talent={execution.talent_name}
-              status={execution.status_}
-              comments={execution.comments_}
-              selfDifficulty ={execution.difficulty}
-              selfReactivity ={execution.reactivity}
-              clickreview={handlePeerReviewClick}
-            />
-          );
       default:
         return <></>;
     }
@@ -136,7 +131,12 @@ const DIOhomepage = () => {
             executionId={executionId}
             setShowPeerReview={setShowPeerReview}
           />
-      ) : (
+      ) : ceoReview ? (
+        <CEOReview
+          executionId={executionId}
+          setShowEvaluation={setCeoReview}
+        /> 
+      ): (
         <div className="main-content">
                   <Wallet  />
           <div className="logo-bar">
@@ -193,6 +193,13 @@ const DIOhomepage = () => {
               setSelfReview={setCreationExecutionWorkAlreadyDone}
             />
           )}
+          {showPopUpCEO && (
+           <CEOreviewPopUp
+           setShowPopUpCEO={setShowPopUpCEO}
+           setCEOReview={setCeoReview}
+           setExecutionId={setExecutionId}
+           />
+      )}
         </div>
       )}
     </div>

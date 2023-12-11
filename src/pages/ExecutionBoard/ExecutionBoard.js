@@ -1,101 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext , useRef} from "react";
 import "./ExecutionBoard.css";
 // import Sidebar from "../../../Components/Sidebar";
 import Sidebar from "../../Components/SidebarDIO.js";
 import PeerReview from "./PeerReview";
 import SelfReview from "./SelfReview";
 import axios from "axios";
-import ExecutionCards from "./ExecutionCards";
 import CEOReview from "../CEOProfil/CEOReview";
-import CEOreviewPopUp from "../DIOhomepage/PopUp/CEOreviewPopUp";
 import Wallet from "../../Components/Wallet";
 import ExecutionMessaging from "../DIOhomepage/ExecutionMessaging";
-
-
 import SubmitionPopUp from "../DIOhomepage/PopUp/SubmitionPopUp";
-
 
 import WorkDonePopUp from "../DIOhomepage/PopUp/WorkDonePopUp";
 import Work from "../DIOhomepage/PopUp/Work";
 import AttributionPopUp from "../DIOhomepage/PopUp/AttributionPopUp";
 
+import ExecutionInProgress from "../DIOhomepage/FeedCard/ExecutionInProgress";
+import ExecutionInReview from "../DIOhomepage/FeedCard/ExecutionSelfPerfo";
+import ExecutionNotAssigned from "../DIOhomepage/FeedCard/ExecutionNotAssigned";
+import CEOreviewPopUp from "../DIOhomepage/PopUp/CEOreviewPopUp";
+import ExecutionAttribution from "../DIOhomepage/ExecutionAttribution";
+import ExecutionCreation from "../DIOhomepage/ExecutionCreation";
 
-
-
-import logo5 from "../../images/logo5.png";
+import { TasksContext } from "../TasksContext";
 
 
 const ExecutionBoard = () => {
 
-
-
-
-
-  const dioId = 1;
-  const [droppedTaskIndex, setDroppedTaskIndex] = useState(null);
-  const [showEvaluation, setShowEvaluation] = useState(false); // Nouvel état
-  const [myExecutions, setMyExecutions] = useState([]);
-  const [executionsInReview, setExecutionsInReview] = useState([]);
-  const [showPopUpCEO, setShowPopUpCEO] = useState(false);
-
-  const [finishedTasks, setFinishedTasks] = useState([]);
-  const [ceoReview, setCeoReview] = useState(false);
-  const [currentExecution, setCurrentExecution] = useState(null);
-  useEffect(() => {
-    axios
-      .get(
-        process.env.REACT_APP_BACKEND_URL +
-          "/executionBoard/myExecutions?userId=" +
-          localStorage.getItem("userId")
-      )
-      .then((res) => {
-        setMyExecutions(res.data);
-      });
-      axios
-      .get(
-        process.env.REACT_APP_BACKEND_URL +
-          "/ceoprofil/executionFinished?dioId=" +
-          dioId
-      )
-      .then((res) => {
-        setFinishedTasks(res.data);
-      });
-
-    axios
-      .get(
-        process.env.REACT_APP_BACKEND_URL +
-          "/executionBoard/ExecutionsInReview?userId=" +
-          localStorage.getItem("userId")
-      )
-      .then((res) => {
-        setExecutionsInReview(res.data);
-      });
-  }, []);
-
-  const handleDropClick = (index) => {
-    setDroppedTaskIndex(index);
-  };
-
-  const handleThanksClick = (executionId) => {
-    setDroppedTaskIndex(executionId);
-    setShowEvaluation(true);
-  };
-
-  const [showPeerReview, setShowPeerReview] = useState(false);
-
-  const handlePeerReviewClick = () => {
-    setShowPeerReview(true);
-  };
-
-
+  const { dioTasks } = useContext(TasksContext);
+  const { propositions } = useContext(TasksContext);
+  const { prop } = useContext(TasksContext);
 
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpWorkDone, setShowPopUpWorkDone] = useState(false);
   const [showPopUpWork, setShowPopUpWork] = useState(false);
   const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
   const [createExecutionText, setCreateExecutionText] = useState("");
-  // const [executions, setExecutions] = useState([]);
+  const [WorkText, setWorkText] = useState("");
 
+  const [showPopUpCEO, setShowPopUpCEO] = useState(false);
+  const [ceoReview, setCeoReview] = useState(false);
   const [executionId, setExecutionId] = useState(0);
   const [isAttributingExecution, setIsAttributingExecution] = useState(false);
   const [isCreatingExecution, setIsCreatingExecution] = useState(false);
@@ -104,76 +47,143 @@ const ExecutionBoard = () => {
     setCreationExecutionWorkAlreadyDone,
   ] = useState(false);
 
-  const executionFeed = myExecutions.map((execution) => (
-    <ExecutionCards
-      execution={execution}
-      handleThanksClick={handleThanksClick}
-      handleDropClick={handleDropClick}
-      droppedTaskIndex={droppedTaskIndex}
-    />
-  ));
+  const myDivRef = useRef(null);
+  
+
+  useEffect(() => {
+    if (myDivRef.current) {
+        myDivRef.current.scrollTop = myDivRef.current.scrollHeight - myDivRef.current.clientHeight;
+    }
+  }, []);
+
+  const [showPeerReview, setShowPeerReview] = useState(false);
+
+  const handlePeerReviewClick = () => {
+    setShowPeerReview(true);
+  };
+
+  const [selectedStatus, setSelectedStatus] = useState("All"); // Initialize with "All" or any default value
+
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  // Filter executions based on the selected status
+  const filteredExecutions = dioTasks.filter((execution) => {
+    if (selectedStatus === "All") {
+      return true; // Show all executions if "All" is selected
+    } else {
+      return execution.status_ === selectedStatus;
+    }
+  });
+
+  const feed = filteredExecutions.map((execution) => {
+    switch (execution.status_) {
+      case "Not assigned":
+        return (
+          <ExecutionNotAssigned
+            id={execution.id}
+            description={execution.exec_description}
+            talent={execution.talent_name}
+            setExecutionId={setExecutionId}
+            setShowPopUpAttribution={setShowPopUpAttribution}
+          />
+        );
+      case "In progress":
+        return (
+          <ExecutionInProgress
+            id={execution.id}
+            description={execution.exec_description}
+            talent={execution.talent_name}
+            deadline={execution.deadline}
+          />
+        );
+      case "In review":
+        return (
+          <ExecutionInReview
+            id={execution.id}
+            description={execution.exec_description}
+            talent={execution.talent_name}
+            status={execution.status_}
+            comments={execution.comments_}
+            selfDifficulty ={execution.difficulty}
+            selfReactivity ={execution.reactivity}
+            clickreview={handlePeerReviewClick}
+            showceopop={setShowPopUpCEO}
+          />
+        );
+      case "Achieved":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.comments_}
+              selfDifficulty ={execution.difficulty}
+              selfReactivity ={execution.reactivity}
+              clickreview={handlePeerReviewClick}
+              showceopop={setShowPopUpCEO}
+            />
+          );
+      default:
+        return <></>;
+    }
+});
 
   return (
     <div className="container1">
       <Sidebar/>
-      
-      {ceoReview ? (
-        <CEOReview
-          executionId={currentExecution}
-          setShowEvaluation={setCeoReview}
+      {isAttributingExecution ? (
+        <ExecutionAttribution
+          executionId={executionId}
+          setIsAttributingExecution={setIsAttributingExecution}
         />
-      ):showPeerReview ? (
-        <PeerReview
-          executionId={droppedTaskIndex}
-          setShowPeerReview={setShowPeerReview}
+      ) : isCreatingExecution ? (
+        <ExecutionCreation
+          executionDescription={createExecutionText}
+          setIsCreatingExecution={setIsCreatingExecution}
         />
-      ) : showEvaluation ? (
+      ) : creationExecutionWorkAlreadyDone ? (
         <SelfReview
-          executionId={droppedTaskIndex}
-          setShowEvaluation={setShowEvaluation}
-        />
+          executionDescription={createExecutionText}
+          setShowEvaluation={setCreationExecutionWorkAlreadyDone}
+          executionId={executionId}
+          executionComment={WorkText}
+        />):
+        showPeerReview ? (
+          <PeerReview
+            executionId={executionId}
+            setShowPeerReview={setShowPeerReview}
+          />
+      ) : ceoReview ? (
+        <CEOReview
+          executionId={executionId}
+          setShowEvaluation={setCeoReview}
+        /> 
       ) : (
         <div className="main-content">
                     <Wallet  />
           <div className="execution-board">
           <h1>DIO Thanks and Tip</h1>
+          <div>
+        {/* Select button to choose status */}
+        <select value={selectedStatus} onChange={handleStatusChange}>
+          <option value="All">All</option>
+          <option value="Not assigned">Not assigned</option>
+          <option value="In progress">In progress</option>
+          <option value="In review">In review</option>
+        </select>
+      </div>
           </div>
 
           <div className="execution-container">
-
-              {/* {myExecutions.map((task) => (
-                <div className="execution" key={task.id}>
-                  <div>
-                    <b>{task.exec_description}</b>
-                  </div>
-                  <div>
-                    To do for the {new Date(task.deadline).toLocaleDateString()}
-                  </div>
-                  <div>Status : {task.status_}</div>
-                  <div className="buttons-container">
-                    <button
-                      className="accept-button"
-                      onClick={() => handleDropClick(task.id)}
-                    >
-                      Drop
-                    </button>
-                    {droppedTaskIndex === task.id && (
-                      <button
-                        className="thanks-button"
-                        onClick={() => {
-                          handleThanksClick();
-                          setDroppedTaskIndex(task.id);
-                        }}
-                      >
-                        Get Your Thanks
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))} */}
-
-
-          </div>
+          <div className="messages" ref={myDivRef}         style={{
+          height: '55vh', // Adjust height as needed
+          overflowY: 'scroll',
+          marginBottom:'0px' // Optional, might not work in all browsers
+        }}>{feed.reverse()}</div>
+        </div>
           <ExecutionMessaging
               createExecutionText={createExecutionText}
               setCreateExecutionText={setCreateExecutionText}
@@ -207,6 +217,13 @@ const ExecutionBoard = () => {
               setShowPopUpAttribution={setShowPopUpAttribution}
               setSelfReview={setCreationExecutionWorkAlreadyDone}
             />
+          )}
+          {showPopUpCEO && (
+           <CEOreviewPopUp
+           setShowPopUpCEO={setShowPopUpCEO}
+           setCEOReview={setCeoReview}
+           setExecutionId={setExecutionId}
+           />
           )}
         </div>
       )}
