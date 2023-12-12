@@ -1,5 +1,5 @@
 import axios from "axios";
-import "../DIOhomepage.css";
+import "./PopupFeed.css";
 
 const SubmitionPopUp = ({
   executionDescription,

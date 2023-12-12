@@ -16,9 +16,8 @@ const Sidebar = () => (
 
     {localStorage.getItem("isCEO") === "1" && (
       <button className="sidebar-section">
-        <Link to="/CEOProfil">
           CEO Profil <span style={{ color: "#DDE11D" }}>★</span>
-        </Link>
+
       </button>
     )}
 

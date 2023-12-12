@@ -1,0 +1,205 @@
+.message.bubble {
+    background-color: #5CB7BB66;
+    /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 0vh;
+    margin-top: 1.6vh; /* espace entre les messages */
+    padding: 15px; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 18px ;
+    flex-direction: column;
+    /* couleur du texte pour une meilleure visibilité sur le fond bleu */
+}
+
+.first{
+    display: flex;
+}
+.first-row{
+    display: flex;
+}
+.exe-description{
+    height: 24vh;
+    margin-right: 1%;
+    margin-left: 3%;
+    width: 50vw;
+}
+
+.description-diopage{
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-top: 0vh; /* espace entre les messages */
+    padding: 3%; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 90% ;
+    width: 40vw;
+    height: 8vh;
+    margin-left: 0%;
+}
+
+.score{
+    height: 4vh;
+    margin-top: 0vh;
+    font-size: 90% ;
+}
+.creator{
+    height: 4vh;
+    margin-bottom: 0vh;
+    font-size: 90% ;
+}
+.right{
+    margin-right: 0%;
+    margin-left: 10%;
+    height: 24vh;
+}
+
+.profile{
+    height: 7vh;
+    margin-bottom: 0.2vh;
+    margin-top: 0.2vh;
+    margin-left: 3vw;
+}
+
+
+.name{
+    font-size: 100%;
+    height: 3vh;
+    margin-right: 0%;
+    margin-top: 1vh;
+}
+
+.thanks-score{
+    margin-top: 5vh;
+}
+
+.statut{
+    background-color: #5CB7BB66;
+    /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 0.5vh; /* espace entre les messages */
+    padding: 10px;
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 80%;
+    display: flex;
+    margin-right:1% ;
+    margin-left: 5%;
+    height: 3vh;
+    width: 12vw;
+}
+
+.count-down{
+    background-color: #5CB7BB66;
+    /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 0.5vh; /* espace entre les messages */
+    padding: 10px;
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 80%;
+    display: flex;
+    margin-right:1% ;
+    margin-left: 5%;
+    height: 3vh;
+    width: 12vw;
+}
+
+.review{
+    margin-left: 70%;
+    font-size: 80%;
+    background-color:  #00000026; /* couleur du fond d'écran */
+    border-radius: 15px;
+}
+
+.add-first{
+    display: flex;
+    font-size: 90%;
+}
+
+.method{
+    font-size: 80%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    padding: 2%; 
+}
+
+.comments{
+    font-size: 80%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    padding: 2%; 
+    margin-left: 1%;
+}
+
+
+.right-second{
+    display: flex;
+    font-size: 90%;
+}
+
+.second-row{
+    display: flex;
+    font-size: 90%;
+}
+
+.doc{
+    font-size: 80%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-top: 0vh; /* espace entre les messages */
+    padding: 2%; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    width: 35vw;
+    height: 8vh;
+    margin-left: 0%;
+}
+.auto-eval{
+    font-size: 85%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-left: 2%;
+    padding: 2%;
+}
+.meet-dead{
+    font-size: 90%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-left: 2%;
+    padding: 2%;
+}
+
+.add-second{
+    font-size: 80%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-top: 0vh; /* espace entre les messages */
+    padding: 2%; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    width: 57vw;
+    height: 8vh;
+    margin-left: 0%;
+}
+
+.ceo-eval{
+    font-size: 80%;
+    background-color:  #474E5426; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-top: 0vh; /* espace entre les messages */
+    padding: 2%; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    width: 57vw;
+    height: 4vh;
+    margin-left: 0%;
+}

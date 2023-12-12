@@ -1,0 +1,105 @@
+.message.bubble {
+    background-color: #5CB7BB66;
+    /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 0vh;
+    margin-top: 1.6vh; /* espace entre les messages */
+    padding: 15px; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 18px ;
+    flex-direction: column;
+    /* couleur du texte pour une meilleure visibilité sur le fond bleu */
+}
+
+.first{
+    display: flex;
+}
+
+.exe-description{
+    height: 24vh;
+    margin-right: 1%;
+    margin-left: 3%;
+    width: 50vw;
+}
+
+.description-diopage{
+    background-color:  #474E5426;; /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 1vh;
+    margin-top: 0vh; /* espace entre les messages */
+    padding: 3%; /* espace à l'intérieur des bulles de message */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 90% ;
+    width: 40vw;
+    height: 8vh;
+    margin-left: 0%;
+}
+
+.score{
+    height: 4vh;
+    margin-top: 0vh;
+    font-size: 90% ;
+}
+.creator{
+    height: 4vh;
+    margin-bottom: 0vh;
+    font-size: 90% ;
+}
+.statut-dead{
+    margin-right: 1%;
+    margin-left: 1%;
+    height: 24vh;
+}
+
+.profile{
+    height: 4vh;
+    margin-bottom: 0.2vh;
+    margin-top: 0.2vh;
+}
+
+ 
+.performer{
+    height: 4vh;
+    display: flex;
+}
+.name{
+    font-size: 100%;
+    height: 3vh;
+}
+
+.statut{
+    background-color: #5CB7BB66;
+    /* couleur du fond d'écran */
+    border-radius: 15px; /* arrondit les coins */
+    margin-bottom: 0.5vh; /* espace entre les messages */
+    padding: 10px;
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 80%;
+    display: flex;
+    margin-right:1% ;
+    height: 3vh;
+    width: 12vw;
+}
+
+.deadline-diopage{
+    background-color: #5CB7BB66;
+    /* couleur du fond d'écran */
+    border-radius: 15px;
+    padding: 10px;
+    margin: 3px; /* arrondit les coins */
+    margin-bottom: 0.2vh; /* espace entre les messages */
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 80% ;
+    display: flex;
+    margin-right:1% ;
+    height: 3vh;
+}
+  
+
+  
+
+  

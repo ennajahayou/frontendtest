@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import "../DIOhomepage.css";
+import "./Work.css";
 
 const SubmitionPopUp = ({
   setShowPopUpWork,
   setIsCreatingExecution,
   setSelfReview,
   setExecutionId,
+  workText,
+  setWorkText
 }) => {
   // TODO: add real information in jsonData
 
@@ -15,7 +17,6 @@ const SubmitionPopUp = ({
     setSelfReview(true);
     setExecutionId(0);
   };
-  const [workText, setWorkText] = useState("");
 
 
 

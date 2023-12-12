@@ -1,8 +1,9 @@
-import ExecutionDone from "./ExecutionCards/ExecutionDone";
-import ExecutionInProgress from "./ExecutionCards/ExecutionInProgress";
-import ExecutionInReview from "./ExecutionCards/ExecutionInReview";
-import ExecutionNotAssigned from "./ExecutionCards/ExecutionNotAssigned";
-import ExecutionNotValidated from "./ExecutionCards/ExecutionNotValidated";
+import ExecutionDone from "./ExecutionBoardCards/ExecutionDone";
+import ExecutionInProgress from "./ExecutionBoardCards/ExecutionInProgress";
+import ExecutionInReview from "./ExecutionBoardCards/ExecutionInReview";
+import ExecutionNotAssigned from "./ExecutionBoardCards/ExecutionNotAssigned";
+import ExecutionNotValidated from "./ExecutionBoardCards/ExecutionNotValidated";
+
 
 const ExecutionCards = ({
   execution,

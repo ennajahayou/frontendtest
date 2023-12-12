@@ -1,0 +1,128 @@
+.submition-pop-up-work-ceo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 50%;
+    height: 50vh;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  }
+  
+  
+  .submition-pop-up-work-ceo input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    background-color: rgb(211, 208, 208);
+    border-radius: 20px;
+    width: 60%;
+    height: 10%;
+    margin-left: 30%;
+    margin: 0 auto;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: black;
+  }
+  
+  .submition-pop-up-work-ceo input::placeholder{
+    color: black;
+    margin-left: 60%;
+  }
+  
+  .submition-pop-up-work-ceo.evaluation-textarea .placeholder {
+    color: black;
+    align-items: left ;
+    width: 70%;
+    height: 10%;
+  }
+  
+  .submition-pop-up-work-ceo h2{
+    background-color: transparent;
+    color: black;
+    font-family: 'Kumbh Sans', sans-serif;
+    margin-right: 60%;
+    font-size: 200%;
+    font-weight: 200%;
+  }
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: grey;
+    margin-right: 5px;
+  }
+  
+  .input-circle{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .span{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+    margin-top: 5%;
+  }
+  
+  .span-text{
+    margin-left: 1%;
+    width: 100%;
+  }
+
+  .container-button-ceo{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .container-button-ceo .button1{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 10%;
+    margin-right: 5%;
+    width: 100%;
+    height: 5vh;
+    background-color: #B7D6ED;
+    border-radius: 20px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;
+  }
+  
+  .container-button-ceo .button2{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+    height: 5vh;
+    background-color: #F6B5B5;
+    border-radius: 20px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;
+  }
+  
+  .container-button-ceo .button3{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 5%;
+    margin-right: 10%;
+    width: 100%;
+    height: 5vh;
+    background-color:  #248D3573;
+    border-radius: 20px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;
+  }
+
+  .files{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+  }

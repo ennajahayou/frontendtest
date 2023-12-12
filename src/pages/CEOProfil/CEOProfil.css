@@ -6,7 +6,7 @@
   /* pour centrer verticalement */
   /* pour centrer horizontalement */
   width: 100%;
-  height: 98vh; /* ajustez selon vos besoins */
+  height: 95vh; /* ajustez selon vos besoins */
   font-family: "Kumbh Sans";
 }
 
@@ -16,7 +16,7 @@
   flex-grow: 1;
   width: 70%;
   background-color: #b7d6ed;
-  height: 93vh;
+  height: 85vh;
   font-family: "Kumbh Sans";
 }
 
@@ -85,7 +85,6 @@ h1 {
   border: 1px solid black;
   cursor: pointer; /* Pour changer le curseur en main lorsque vous survolez le bouton */
   border-radius: 40px; /* Pour avoir des coins arrondis sur le bouton */
-
   justify-content: center;
   align-items: center;
   padding: 5px 10px;

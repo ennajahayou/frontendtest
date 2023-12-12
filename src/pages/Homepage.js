@@ -20,7 +20,6 @@ const Homepage = () => (
   <div className="App">
     <Sidebar />
     <div className="main-content">
-      <h4 className="wallet">My Wallet</h4>
       <Wallet  />
       <h4 className="titre">My DIO</h4>
       <DIOList dioData={dioData} />

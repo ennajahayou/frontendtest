@@ -4,10 +4,9 @@ import axios from "axios";
 import righthand from '../../images/icones/hand-right.png';
 import lefthand from '../../images/icones/hand-left.png';
 
-const CEOReview = ({ executionId, setShowEvaluation }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+const CEOReview = ({ executionId, setShowEvaluation ,setShowPopUpCEO ,comments }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const [expectations, setExpectations] = useState(0);
-  const [comments, setComments] = useState("");
 
   const handleExpectationsClick = (index) => {
     setExpectations(index);
@@ -35,8 +34,8 @@ const CEOReview = ({ executionId, setShowEvaluation }) => {
           <h2>Comments</h2>
           <textarea
             className="evaluation-textarea"
-            value={comments}
-            onChange={(e) => setComments(e.target.value)}
+            //value={comments}
+            //onChange={(e) => setComments(e.target.value)}
           />
           <button
             className="evaluation-button"

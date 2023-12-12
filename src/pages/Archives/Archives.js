@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 import { useContext } from 'react';
-import { TasksContext } from './TasksContext';
+import { TasksContext } from '../TasksContext';
 
 import './Archives.css';
-import Sidebar from '../Components/SidebarDIO';
-import Wallet from "../Components/Wallet";
-import ExecutionMessaging from "./DIOhomepage/ExecutionMessaging";
+import Sidebar from '../../Components/SidebarDIO';
+import Wallet from "../../Components/Wallet";
+import ExecutionMessaging from "../DIOhomepage/ExecutionMessaging";
 
-import logo5 from '../images/logo5.png';
+
 
 
 

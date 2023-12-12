@@ -1,18 +1,19 @@
 /* CEOProfil.css */
 .container1 {
   display:flex;
-  height: 832px; /* ajustez selon vos besoins */
+  height: 97vh; /* ajustez selon vos besoins */
 }
 
 .execution-board {
   position: relative;
-  width: 100%;
-  height: 100px; /* exemple de hauteur, ajustez selon vos besoins */
+  width: 95vh;
+  height: 12vh; /* exemple de hauteur, ajustez selon vos besoins */
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Kumbh Sans', sans-serif;
-  margin-top: 18px;
+  margin-top: 1vh;
+  margin-left: 15vw;
 
 }
 .execution-board h1{
@@ -26,14 +27,14 @@
   border: none; /* Ajout d'une bordure autour du conteneur des tâches */
   position: relative;
   background-color: white;
-  height: 650px;
+  height: 60vh;
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 15px;
+  margin-top: 1.5vh;
 }
 
 .scroll {
-  height: 430px; /* ou tout autre valeur selon votre conception */
+  height: 51.6vh; /* ou tout autre valeur selon votre conception */
   overflow-y: auto;
   width: 100%;
   margin-top: 50px;
@@ -176,18 +177,7 @@ h1 {
   /* Autres styles selon vos besoins */
 }
 
-.evaluation-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  background-color: white ;
-  border-radius: 20px;
-  width: 120vh;
-  height: 80vh;
-  margin: 0 auto;
-  font-family: 'Kumbh Sans', sans-serif;
-}
+
 
 .evaluation-textarea{
   display: flex;
@@ -208,13 +198,7 @@ h1 {
   color: black;
   align-items: left ;
 }
-.evaluation-container h2 {
-  margin-top: 10vh;
-  font-size: 30px;
-  margin-bottom: 30px;
-  background-color: white;
-  color: black;
-}
+
 
 .evaluation-button1 {
   background-color: #a8d5e2;
@@ -230,63 +214,16 @@ h1 {
   margin-left: 50%;
 }
 
-.evaluation-button {
-  background-color:  #92C5BB;
-  border: none;
-  border-radius: 25px;
-  color: white  ;
-  padding: 10px 30px;
-  margin: 10px 0;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
-  width: 50%;
-}
-
-.congratulations{
-  display: flex;
-  flex-direction: row;
-  width: 110%;
-}
-.righthand{
-  margin-left: 10%;
-  width: 50%;
-  height: 30vh;
-  margin-top: 10%;
-}
-.lefthand{
-  margin-right: 10%;
-  width: 50%;
-  height: 30vh;
-  margin-top: 10%;
-}
-
-.backtofeed-button {
-  background-color:  #92C5BB;
-  border: none;
-  border-radius: 25px;
-  color: black  ;
-  cursor: pointer;
-  font-size: 150%;
-  font-weight: 500;
-  transition: 0.3s;
-  width: 200%;
-  height: 10vh;
-  font-family: 'Kumbh Sans', sans-serif;
-  margin-top: 20%;
-}
-
-
 .evaluation-button:hover {
   background-color: #8bc4d0;
 }
 
 .evaluation-container h1 {
-  margin-top: 30vh;
+  margin-top: 20vh;
   font-size: 43px;
   font-weight: 500; /* Adjust this to your preferred size */
   color: black;
-  margin-bottom: 30px;
+  margin-bottom: 10vh;
   text-align: center; /* Centering the text */
 }
 

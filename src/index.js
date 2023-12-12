@@ -25,14 +25,20 @@ import Homepage from "./pages/Homepage";
 import DIOhomepage from "./pages/DIOhomepage/DIOhomepage";
 import CEOProfil from "./pages/CEOProfil/CEOProfil";
 import ExecutionBoard from "./pages/ExecutionBoard/ExecutionBoard";
-import Archives from "./pages/Archives";
+import Archives from "./pages/Archives/Archives";
 import LoginPage from "./pages/login";
 import SignupPage from "./pages/signup";
 import UserDetails from "./pages/UserDetails/UserDetails";
 import Parameters from "./pages/Parameters/Parameters";
 import LoginA from "./pages/loginA";
+import Myprofile from "./pages/Myprofile";
+import CEOprerogatives from "./pages/CEOprerogatives/CEOprerogatives";
+import Coopt from "./pages/Co-opt/Co-opt";
+import Idea from "./pages/Idea/Idea";
+
 
 import { TasksProvider } from "./pages/TasksContext";
+
 
 export default function App() {
   return (
@@ -49,8 +55,12 @@ export default function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="loginA" element={<LoginA />} />
           <Route path="signup" element={<SignupPage />} />
+          <Route path="Myprofile" element={<Myprofile />} />
           <Route path="UserDetails" element={<UserDetails />} />
           <Route path="Parameters" element={<Parameters />} />
+          <Route path="CEOprerogatives" element={<CEOprerogatives />} />
+          <Route path="Co-opt" element={<Coopt />} />
+          <Route path="Idea" element={<Idea />} />
         </Routes>
       </BrowserRouter>
     </TasksProvider>

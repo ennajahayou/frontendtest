@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
+import { useState, useContext , useEffect, useRef} from "react";
+
 
 import Sidebar from "../../Components/SidebarDIO";
-import ExecutionInProgress from "./ExecutionCard/ExecutionInProgress";
-import ExecutionInReview from "./ExecutionCard/ExecutionInReview";
-import ExecutionNotAssigned from "./ExecutionCard/ExecutionNotAssigned";
+import ExecutionInProgress from "./FeedCard/ExecutionInProgress";
+import ExecutionInReview from "./FeedCard/ExecutionSelfPerfo";
+import ExecutionNotAssigned from "./FeedCard/ExecutionNotAssigned";
 import SubmitionPopUp from "./PopUp/SubmitionPopUp";
 import ExecutionMessaging from "./ExecutionMessaging";
 import ExecutionAttribution from "./ExecutionAttribution";
@@ -12,13 +13,16 @@ import Work from "./PopUp/Work";
 import AttributionPopUp from "./PopUp/AttributionPopUp";
 import ExecutionCreation from "./ExecutionCreation";
 import SelfReview from "./SelfReview";
+import Wallet from "../../Components/Wallet";
+import PeerReview from "../ExecutionBoard/PeerReview";
 
-import personna from '../../images/icones/personna.png';
+import CEOReview from "../CEOProfil/CEOReview";
+import CEOreviewPopUp from "../DIOhomepage/PopUp/CEOreviewPopUp";
+
 import "./DIOhomepage.css";
 
 import { TasksContext } from "../TasksContext";
 
-import logo5 from "../../images/logo5.png";
 
 const DIOhomepage = () => {
   // const dioId = 1; //TODO : add real DIO id
@@ -32,7 +36,13 @@ const DIOhomepage = () => {
   const [showPopUpWork, setShowPopUpWork] = useState(false);
   const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
   const [createExecutionText, setCreateExecutionText] = useState("");
-  // const [executions, setExecutions] = useState([]);
+  const [WorkText, setWorkText] = useState("");
+  const [CommentCEO, setCommentCEO] = useState("");
+
+  let [currentExecution, setCurrentExecution] = useState(null);
+
+  const [showPopUpCEO, setShowPopUpCEO] = useState(false);
+  const [ceoReview, setCeoReview] = useState(false);
   const [executionId, setExecutionId] = useState(0);
   const [isAttributingExecution, setIsAttributingExecution] = useState(false);
   const [isCreatingExecution, setIsCreatingExecution] = useState(false);
@@ -41,7 +51,26 @@ const DIOhomepage = () => {
     setCreationExecutionWorkAlreadyDone,
   ] = useState(false);
 
-  const feed = dioTasks.map((execution) => {
+  const myDivRef = useRef(null);
+  
+
+  useEffect(() => {
+    if (myDivRef.current) {
+        myDivRef.current.scrollTop = myDivRef.current.scrollHeight - myDivRef.current.clientHeight;
+    }
+  }, []);
+
+  const [showPeerReview, setShowPeerReview] = useState(false);
+
+  const handlePeerReviewClick = () => {
+    setShowPeerReview(true);
+  };
+  let handleCEOReview = (executionId) => {
+    setCurrentExecution(executionId); // Set the ID of the execution card clicked
+    setShowPopUpCEO(true); // Toggle the CEO review popup
+  };
+
+  const feed = dioTasks.map((execution ) => {
     switch (execution.status_) {
       case "Not assigned":
         return (
@@ -68,8 +97,30 @@ const DIOhomepage = () => {
             id={execution.id}
             description={execution.exec_description}
             talent={execution.talent_name}
+            status={execution.status_}
+            comments={execution.comments_}
+            selfDifficulty ={execution.difficulty}
+            selfReactivity ={execution.reactivity}
+            clickreview={handlePeerReviewClick}
+            showceopop={() => handleCEOReview(execution.id) }
+            currentExecution={() =>{ setCurrentExecution(execution.id)}}
           />
         );
+        case "Achieved":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.comments_}
+              selfDifficulty ={execution.difficulty}
+              selfReactivity ={execution.reactivity}
+              clickreview={handlePeerReviewClick}
+              showceopop={() => handleCEOReview(execution.id) }
+              currentExecution={() =>{ setCurrentExecution(execution.id)}}
+            />
+          );
       default:
         return <></>;
     }
@@ -78,6 +129,7 @@ const DIOhomepage = () => {
   return (
     <div className="App">
       <Sidebar />
+      
       {isAttributingExecution ? (
         <ExecutionAttribution
           executionId={executionId}
@@ -93,22 +145,37 @@ const DIOhomepage = () => {
           executionDescription={createExecutionText}
           setShowEvaluation={setCreationExecutionWorkAlreadyDone}
           executionId={executionId}
-        />
-      ) : (
+          executionComment={WorkText}
+        />):
+        showPeerReview ? (
+          <PeerReview
+            executionId={executionId}
+            setShowPeerReview={setShowPeerReview}
+          />
+      ) : ceoReview ? (
+        <CEOReview
+          executionId={currentExecution}
+          setShowEvaluation={setCeoReview}
+          comments={CommentCEO}
+        /> 
+      ): (
         <div className="main-content">
+                  <Wallet  />
           <div className="logo-bar">
-            <img className="personna" src={personna} />
             <h1>DIO Thanks and Tip</h1>
-            <h4 className="thanks">
-              1 429 690 <img className="symbole" src={logo5} />
-            </h4>
           </div>
+          <div  className="barre-reche">
+            <input placeholder="Barre de recherche"></input>
+          </div>
+  
 
           {/* Messaging */}
-          <div className="messaging-container">
-            <div className="scroll">
-              <div className="messages">{feed}</div>
-            </div>
+          <div className="messaging-container" >
+              <div className="messages" ref={myDivRef}         style={{
+          height: '55vh', // Adjust height as needed
+          overflowY: 'scroll',
+          marginBottom:'0px' // Optional, might not work in all browsers
+        }}>{feed.reverse()}</div>
 
           </div>
           <ExecutionMessaging
@@ -136,6 +203,9 @@ const DIOhomepage = () => {
               setShowPopUpWork={setShowPopUpWork}
               setSelfReview={setCreationExecutionWorkAlreadyDone}
               setExecutionId={setExecutionId}
+              WorkText={WorkText}
+              setWorkText={setWorkText}
+
             />
           )}
           {showPopUpAttribution && (
@@ -145,6 +215,15 @@ const DIOhomepage = () => {
               setSelfReview={setCreationExecutionWorkAlreadyDone}
             />
           )}
+          {showPopUpCEO && ( 
+           <CEOreviewPopUp
+           setShowPopUpCEO={setShowPopUpCEO}
+           setCEOReview={setCeoReview}
+           comments={CommentCEO}
+           setComments={setCommentCEO}
+           />
+      )}
+      {showPopUpCEO && ( console.log(currentExecution) )}
         </div>
       )}
     </div>

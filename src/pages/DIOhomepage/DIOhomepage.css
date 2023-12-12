@@ -1,19 +1,24 @@
 .App {
   display: flex;
-  height: 832px;
-
+  overflow-y: hidden;
+  height: 97vh;
   /* autres styles */
+}
+
+.main-content{	
+  height: 97vh;
+  width: 75.7vw;	
+  overflow-y: hidden;
 }
 
 .logo-bar {
   position: relative;
   width: 100%;
-  height: 100px; /* exemple de hauteur, ajustez selon vos besoins */
+  height: 10vh; /* exemple de hauteur, ajustez selon vos besoins */
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Kumbh Sans', sans-serif;
-  margin-top: 18px;
 }
 
 
@@ -21,37 +26,81 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 600px;
+  height: 57vh;
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 15px;
   background-color: white;
+  margin-bottom: 0%;
   /* ajustez selon vos besoins */
   /* ajustez selon vos besoins */
 }
 
-
 .messages {
-  background-color: white;
-  padding: 20px; /* Espace à l'intérieur des rectangles */
+  background-color: white; /* Espace à l'intérieur des rectangles */
   /* Espace entre les rectangles */
   /* Bordure autour des rectangles */
   border-radius: 5px; /* Coins arrondis */
   width: 93%;
-  margin: auto;
+  margin-bottom: 0%;
+  overflow-y:scroll ;
+  height: 50vh;
+  position: relative;
+  margin-top: 0%;
   /* pour centrer horizontalement */
 }
 
-.message.bubble {
-  background-color: #5CB7BBA3; /* couleur du fond d'écran */
+
+
+.deadline-diopage{
+  background-color: #5CB7BB66;
+  /* couleur du fond d'écran */
+  border-radius: 15px;
+  padding: 10px;
+  margin: 3px; /* arrondit les coins */
+  margin-bottom: 0.2vh; /* espace entre les messages */
+  color: black;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 80% ;
+  display: flex;
+  margin-right:1% ;
+  height: 3vh;
+}
+
+.profile{
+  height: 4vh;
+  margin-bottom: 0.2vh;
+  margin-top: 0.2vh;
+
+}
+.description-diopage{
+  background-color:  #474E5426;
+  ; /* couleur du fond d'écran */
   border-radius: 15px;
   margin: 20px; /* arrondit les coins */
-  margin-bottom: 30px; /* espace entre les messages */
+  margin-bottom: 3vh; /* espace entre les messages */
   padding: 30px; /* espace à l'intérieur des bulles de message */
   color: black;
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 18px ;
-  /* couleur du texte pour une meilleure visibilité sur le fond bleu */
+  width: 40vw;
+}
+
+.performer{
+  font-size: 75%;
+  height: 3vh;
+}
+
+.statut-dead{
+  margin-right: 1%;
+  margin-left: 1%;
+  height: 24vh;
+}
+
+.exe-description{
+  height: 24vh;
+  margin-right: 1%;
+  margin-left: 4%;
+  width: 50vw;
 }
 
 .message.button {
@@ -75,116 +124,25 @@
   position: relative;
 }
 
-.input-container {
-  position: relative;
-
-  background-color:  #082247;
-  ;
-  padding: 20px; /* Espace à l'intérieur des rectangles */
-  margin-left: 30px;
-  margin-right: 30px;
-  height: auto;
-  /* pour centrer horizontalement */
-}
-
-.input-submit {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color:  #5CB7BBA3;
-  padding: 20px; /* Espace à l'intérieur des rectangles */
-  /* Espace entre les rectangles */
-  /* Bordure autour des rectangles */
-  /* Coins arrondis */
-  width: 90%;
-  height: 20px;
-  border-radius: 20px;
-  margin: auto;
-  /* pour centrer horizontalement */
-}
-
-.message-input {
-  flex-grow: 2; /* Cela permettra aux deux éléments de prendre autant d’espace que possible */
-  padding: 15px; /* Ajoute du remplissage pour augmenter la taille des éléments */
-  background-color: transparent; /* Ajustez la couleur de fond selon vos besoins */
-  color: white; /* Ajustez la couleur du texte selon vos besoins */
-  border: none;
-  font-size: large; /* Supprime la bordure, ajustez selon vos besoins */
-}
 
 ::placeholder {
   color: rgb(210, 210, 210);
 }
 
-.send-button {
-  /* Supprime la bordure, ajustez selon vos besoins */
-  width: 18%;
-  padding: 15px 15px;
-  font-size: 15px; /* Ajustez la taille de la police si nécessaire */
-  border: none; /* Pour supprimer la bordure par défaut des boutons */
-  background-color: white; /* Pour changer la couleur de fond du bouton */
-  color: black; /* Pour changer la couleur du texte du bouton */
-  cursor: pointer; /* Pour changer le curseur en main lorsque vous survolez le bouton */
-  border-radius: 40px;
-  font-weight: bold;
-}
-
-.send-button:hover{
-  background-color: gray;
-  color: black;
-}
-
-.submition-pop-up {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(114, 114, 114, 0.8);
-  width: 350px;
-  height: 150px;
-  border-radius: 10px;
-  padding: 20px;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
-.submitButton {
-  background-color:  #305E7E;
-  ;
-  border: none;
-  color: white;
-  /* padding: 15px 32px; */
-  width: 300px;
-  height: 50px;
-  text-align: center;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 10px;
-  font-family: 'Kumbh Sans', sans-serif;
-}
-.submitButton:hover {
-  color: white; /* Change the color on hover (replace 'red' with your desired color) */
-  background-color: gray; /* Ensuring the background stays transparent on hover */
-}
 
 .scroll {
-  margin-top: 50px;
-  height: 430px; /* ou tout autre valeur selon votre conception */
+  margin-top: 40px;
+  height: 51vh; /* ou tout autre valeur selon votre conception */
   overflow-y: auto;
   width: 100%;
 }
 
 .scroll::-webkit-scrollbar {
-  width: 1px; /* Largeur de la barre de défilement */
+  width: 5px; /* Largeur de la barre de défilement */
 }
 
 .scroll::-webkit-scrollbar-track {
-  background-color: #f5f5f5; /* Couleur de fond de la barre */
+  background-color: gray; /* Couleur de fond de la barre */
 }
 
 .scroll::-webkit-scrollbar-thumb {
@@ -201,7 +159,7 @@
   color: white;
   font-size: xx-large;
   justify-content: center;
-  margin: 10px;
+  margin: 1%;
 }
 
 
@@ -231,178 +189,17 @@ h1,
   margin-left: 5px; /* espace entre le texte "0" et l'image */
 }
 
-
-.submition-pop-up-work {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  width: 40%;
-  height: 50vh;
-  border-radius: 10px;
-  padding: 20px;
-  z-index: 100;
+.barre-reche input{
+  font-family: "Kumbh Sans";
+  width: 45vw;
+  height: 4vh;
+  margin-left: 16vw;
+  border-radius: 8px;
+  background-color: white; /* Espace à l'intérieur des rectangles */
+  margin-bottom: 1vh;
+  margin-top: 0px; /* Espace entre les rectangles */
+  border: 1px solid #ccc; /* Bordure autour des rectangles */; /* Coins arrondis */
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   align-items: center;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
-.submition-pop-up-work input{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  background-color: rgb(211, 208, 208);
-  border-radius: 20px;
-  width: 70%;
-  height: 10%;
-  margin: 0 auto;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: black;
-  
-}
-
-
-
-.submition-pop-up-work h2{
-  background-color: transparent;
-  color: black;
-  font-family: 'Kumbh Sans', sans-serif;
-  margin-right: 60%;
-  font-size: 200%;
-  font-weight: 200%;
-}
-
-
-.submition-pop-up-work-ceo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  width: 70%;
-  height: 50vh;
-  border-radius: 10px;
-  padding: 20px;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-}
-
-
-.submition-pop-up-work-ceo input{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  background-color: rgb(211, 208, 208);
-  border-radius: 20px;
-  width: 60%;
-  height: 10%;
-  margin-left: 30%;
-  margin: 0 auto;
-  font-family: 'Kumbh Sans', sans-serif;
-  color: black;
-}
-
-.submition-pop-up-work-ceo input::placeholder{
-  color: black;
-  margin-left: 60%;
-}
-
-.submition-pop-up-work-ceo.evaluation-textarea .placeholder {
-  color: black;
-  align-items: left ;
-  width: 70%;
-  height: 10%;
-}
-
-.submition-pop-up-work-ceo h2{
-  background-color: transparent;
-  color: black;
-  font-family: 'Kumbh Sans', sans-serif;
-  margin-right: 60%;
-  font-size: 200%;
-  font-weight: 200%;
-}
-
-
-.container-button-ceo{
-  display: flex;
-  justify-content: space-around;
-}
-
-.container-button-ceo .button1{
-  display: flex;
-  justify-content: space-around;
-  margin-left: 10%;
-  margin-right: 5%;
-  width: 100%;
-  height: 5vh;
-  background-color: #B7D6ED;
-  border-radius: 20px;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden;
-}
-
-.container-button-ceo .button2{
-  display: flex;
-  justify-content: space-around;
-  margin-left: 5%;
-  margin-right: 5%;
-  width: 100%;
-  height: 5vh;
-  background-color: #F6B5B5;
-  border-radius: 20px;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden;
-}
-
-.container-button-ceo .button3{
-  display: flex;
-  justify-content: space-around;
-  margin-left: 5%;
-  margin-right: 10%;
-  width: 100%;
-  height: 5vh;
-  background-color:  #248D3573;
-  border-radius: 20px;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden;
-}
-
-.circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: grey;
-  margin-right: 5px;
-}
-
-.input-circle{
-  display: flex;
-  justify-content: space-around;
-}
-
-.span{
-  display: flex;
-  flex-direction: column;
-  margin-left: 1%;
-  margin-top: 5%;
-}
-
-.span-text{
-  margin-left: 1%;
-  width: 100%;
-}
-
-.files{
-  display: flex;
-  flex-direction: row;
-  margin-top: 5%;
 }

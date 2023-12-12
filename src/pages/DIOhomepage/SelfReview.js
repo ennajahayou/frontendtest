@@ -1,4 +1,4 @@
-import "../ExecutionBoard/ExecutionBoard.css";
+import "./SelfReview.css";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { TasksContext } from "../TasksContext";
@@ -12,23 +12,28 @@ const SelfReview = ({
   executionDescription,
   setShowEvaluation,
   executionId,
+  executionComment
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [difficulty, setDifficulty] = useState(0);
   const [workText, setWorkText] = useState("");
-  const [countdownValues, setCountdownValues] = useState({
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+
   const [departHours, setDepartHours] = useState(24); // Initialiser à une valeur par défaut
+  const { hours, minutes, seconds } = useCountdown(departHours);
+  const [showCountdown, setShowCountdown] = useState(true);
 
   const handleDepartHours1 = (value) => {
-    setDepartHours(value);
+    const roundedValue = Math.ceil(value);
+    setDepartHours(roundedValue);
   };
 
-
-
+  useEffect(() => {
+    if (departHours < 6) {
+      setShowCountdown(false);
+    } else {
+      setShowCountdown(true);
+    }
+  }, [departHours]);
 
   /*useEffect(() => {
     if (currentQuestion === 3) {
@@ -57,17 +62,19 @@ const SelfReview = ({
 
   const { addProposition } = useContext(TasksContext);
 
+
   const handleDifficultyClick = (index) => {
     setDifficulty(index);
     setCurrentQuestion(1);
   };
 
   const handleSubmit = (index) => {
+    var statut = "In review"
     if (executionId !== 0) {
       const dataReview = {
         userId: localStorage.getItem("userId"),
         executionId: executionId,
-        comment: "test",
+        comment:   executionComment,
         difficulty: difficulty,
         reactivity: index,
       };
@@ -78,10 +85,8 @@ const SelfReview = ({
           dataReview
         )
         .then((res) => {
-          const newDepartHours = res.data.data.departHours;
+          const newDepartHours = res.data.data.responseValue;
           console.log(newDepartHours);
-          
-
           handleDepartHours1(newDepartHours);
           setCurrentQuestion(3);
         });
@@ -92,38 +97,46 @@ const SelfReview = ({
         execContent: "Work already done",
       });
     } else {
-      const data = {
-        userId: localStorage.getItem("userId"),
-        executionDescription: executionDescription,
-        dioId: 1,
-        texte: workText,
-      };
-
       axios
-        .post(process.env.REACT_APP_BACKEND_URL + "/execution/workDone", data)
+        .post(process.env.REACT_APP_BACKEND_URL + "/execution/workDone", {
+          userId: localStorage.getItem("userId"),
+          executionDescription: executionDescription,
+          dioId: 1,
+          texte: workText,
+          status:'In review'
+        })
         .then((res) => {
           addProposition(executionDescription);
+          const executionId = res.data.insertId;
           const dataReview = {
             userId: localStorage.getItem("userId"),
-            executionId: res.data.insertId,
-            comment: "test",
+            executionId: executionId,
+            comment:   executionComment,
             difficulty: difficulty,
             reactivity: index,
           };
-
           axios
             .post(
               process.env.REACT_APP_BACKEND_URL + "/review/selfReview",
               dataReview
             )
             .then((res) => {
-              const newDepartHours = res.data.data.departHours;
-              console.log(newDepartHours);
+              const newDepartHours = res.data.data.responseValue;
               handleDepartHours1(newDepartHours);
+              let updatedStatut = "In review";
+              if (newDepartHours < 6) {
+                updatedStatut = "Achieved";
+              }
+              console.log(newDepartHours ,updatedStatut)
               setCurrentQuestion(3);
-            }
-            );
-        });
+              axios
+              .post(process.env.REACT_APP_BACKEND_URL + "/execution/updateStatus",
+              {executionId ,updatedStatut})
+
+      }
+      );
+      });
+
     }
   };
 
@@ -176,8 +189,17 @@ const SelfReview = ({
       ) : (     
         <>
           <h1>CONGRATULATION !</h1>
+          {showCountdown ? (
+        <>
           <p>You will see your thanks in</p>
-          <p>{`${countdownValues.hours}H:${countdownValues.minutes}Mn:${countdownValues.seconds}s`}</p>
+          <p>{`${hours}H:${minutes}Mn:${seconds}s`}</p>
+        </>
+      ) : (
+        <>
+          <p>You win thanks for your work</p>
+          <p>{`${departHours} Thanks`}</p>
+        </>
+      )}
           <div className="congratulations">
           <img className="lefthand" src={lefthand} />
           <button
