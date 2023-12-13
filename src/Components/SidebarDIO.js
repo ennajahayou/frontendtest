@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useLocation} from "react-router-dom";
 import "./Sidebar.css";
 
 
@@ -15,6 +15,14 @@ import story from '../images/icones/story-board.png';
 function Sidebar  () {
    const [content, setContent] = useState([]);
 
+   const [activeSection, setActiveSection] = useState(null);
+   const location = useLocation();
+
+   useEffect(() => {
+    const path = location.pathname;
+    setActiveSection(path);
+  }, [location]);
+
    useEffect(() => {
        fetch('/api/content')
            .then(response => response.json())
@@ -28,22 +36,22 @@ function Sidebar  () {
        <img className="image_bar" src={logo} alt="Logo"  />
     </Link>
     </div>
-   <Link to="/DIO" className="sidebar-section-link">
+   <Link to="/DIO"  className={`sidebar-section-link ${activeSection === "/DIO" ? 'active' : ''}`}>
        <img className="icon" src={message} /><span>My Feed</span>
    </Link>
-   <Link to="/ExecutionBoard" className="sidebar-section-link">
+   <Link to="/ExecutionBoard" className={`sidebar-section-link ${activeSection === "/ExecutionBoard" ? 'active' : ''}`}>
        <img src={story}  />My Work Board
    </Link>
-    <Link to="/Idea" className="sidebar-section-link">
+    <Link to="/Idea" className={`sidebar-section-link ${activeSection === "/Idea" ? 'active' : ''}`}>
         <img src={idee}  />Push an Idea
     </Link>
-    <Link to="/Co-opt" className="sidebar-section-link">
+    <Link to="/Co-opt" className={`sidebar-section-link ${activeSection === "/Co-opt" ? 'active' : ''}`}>
         <img src={poignee}  />Co-opt Talent
     </Link>
-       <Link to="/Archives" className="sidebar-section-link">
+       <Link to="/Archives" className={`sidebar-section-link ${activeSection === "/Archives" ? 'active' : ''}`}>
         <img src={archiver}  />My Archives
         </Link>
-    <Link to="/CEOprerogatives" className="sidebar-section-link">
+    <Link to="/CEOprerogatives" className={`sidebar-section-link ${activeSection === "/CEOprerogatives" ? 'active' : ''}`}>
        <img src={poignee}  />CEO Prerogatives 
     </Link>
     <div className="sidebar-section espace"></div>

@@ -98,12 +98,15 @@ const DIOhomepage = () => {
             description={execution.exec_description}
             talent={execution.talent_name}
             status={execution.status_}
-            comments={execution.comments_}
+            comments={execution.review_comments}
             selfDifficulty ={execution.difficulty}
-            selfReactivity ={execution.reactivity}
+            selfReactivity ={execution.review_reactivity}
             clickreview={handlePeerReviewClick}
             showceopop={() => handleCEOReview(execution.id) }
             currentExecution={() =>{ setCurrentExecution(execution.id)}}
+            ceo_comments={execution.ceo_comments}
+            ceo_expectations={execution.expectations}
+            ceo_reactivity={execution.ceo_reactivity}
           />
         );
         case "Achieved":
@@ -113,12 +116,15 @@ const DIOhomepage = () => {
               description={execution.exec_description}
               talent={execution.talent_name}
               status={execution.status_}
-              comments={execution.comments_}
+              comments={execution.review_comments}
               selfDifficulty ={execution.difficulty}
-              selfReactivity ={execution.reactivity}
+              selfReactivity ={execution.review_reactivity}
               clickreview={handlePeerReviewClick}
               showceopop={() => handleCEOReview(execution.id) }
               currentExecution={() =>{ setCurrentExecution(execution.id)}}
+              ceo_comments={execution.ceo_comments}
+              ceo_expectations={execution.expectations}
+              ceo_reactivity={execution.ceo_reactivity}
             />
           );
       default:
@@ -163,16 +169,16 @@ const DIOhomepage = () => {
                   <Wallet  />
           <div className="logo-bar">
             <h1>DIO Thanks and Tip</h1>
-          </div>
-          <div  className="barre-reche">
+            <div  className="barre-reche">
             <input placeholder="Barre de recherche"></input>
+            </div>
           </div>
-  
+
 
           {/* Messaging */}
           <div className="messaging-container" >
               <div className="messages" ref={myDivRef}         style={{
-          height: '55vh', // Adjust height as needed
+          height: '62vh', // Adjust height as needed
           overflowY: 'scroll',
           marginBottom:'0px' // Optional, might not work in all browsers
         }}>{feed.reverse()}</div>

@@ -14,7 +14,10 @@
 
 .first{
     display: flex;
+    height: 18.5vh;
 }
+
+
 .first-row{
     display: flex;
 }
@@ -35,7 +38,7 @@
     font-family: 'Kumbh Sans', sans-serif;
     font-size: 90% ;
     width: 40vw;
-    height: 8vh;
+    height: 7vh;
     margin-left: 0%;
 }
 
@@ -45,13 +48,17 @@
     font-size: 90% ;
 }
 .creator{
-    height: 4vh;
+    height: 3vh;
     margin-bottom: 0vh;
+    margin-top: 1vh;
     font-size: 90% ;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 .right{
     margin-right: 0%;
-    margin-left: 10%;
+    margin-left: 8%;
     height: 24vh;
 }
 
@@ -68,17 +75,29 @@
     height: 3vh;
     margin-right: 0%;
     margin-top: 1vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .thanks-score{
-    margin-top: 5vh;
+    margin-top: 1vh;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.thanks-score p{
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .statut{
     background-color: #5CB7BB66;
-    /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
-    margin-bottom: 0.5vh; /* espace entre les messages */
+    margin-bottom: 1vh; /* espace entre les messages */
     padding: 10px;
     color: black;
     font-family: 'Kumbh Sans', sans-serif;
@@ -88,13 +107,15 @@
     margin-left: 5%;
     height: 3vh;
     width: 12vw;
+    justify-content: center;
+    align-items: center;
 }
 
 .count-down{
     background-color: #5CB7BB66;
     /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
-    margin-bottom: 0.5vh; /* espace entre les messages */
+    margin-bottom: 1vh; /* espace entre les messages */
     padding: 10px;
     color: black;
     font-family: 'Kumbh Sans', sans-serif;
@@ -104,6 +125,8 @@
     margin-left: 5%;
     height: 3vh;
     width: 12vw;
+    justify-content: center;
+    align-items: center;
 }
 
 .review{
@@ -116,6 +139,7 @@
 .add-first{
     display: flex;
     font-size: 90%;
+    margin-top: 3vh;
 }
 
 .method{
@@ -133,12 +157,15 @@
     margin-bottom: 1vh;
     padding: 2%; 
     margin-left: 1%;
+    width: 7vw;
+    flex-direction: column;
 }
 
 
 .right-second{
     display: flex;
     font-size: 90%;
+    width: 20vw;
 }
 
 .second-row{
@@ -164,8 +191,14 @@
     background-color:  #474E5426; /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
     margin-bottom: 1vh;
-    margin-left: 2%;
+    margin-left:6%;
     padding: 2%;
+    width: 15vw;
+    flex-direction: flex;
+}
+
+.dif-rea{
+    display: flex;
 }
 .meet-dead{
     font-size: 90%;
@@ -177,7 +210,11 @@
 }
 
 .add-second{
-    font-size: 80%;
+    display: flex;
+}
+
+.peer-review{
+    font-size: 70%;
     background-color:  #474E5426; /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
     margin-bottom: 1vh;
@@ -185,21 +222,20 @@
     padding: 2%; /* espace à l'intérieur des bulles de message */
     color: black;
     font-family: 'Kumbh Sans', sans-serif;
-    width: 57vw;
-    height: 8vh;
+    width: 40vw;
     margin-left: 0%;
 }
 
 .ceo-eval{
-    font-size: 80%;
+    font-size: 70%;
     background-color:  #474E5426; /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
-    margin-bottom: 1vh;
+    margin-bottom: 0vh;
     margin-top: 0vh; /* espace entre les messages */
     padding: 2%; /* espace à l'intérieur des bulles de message */
     color: black;
     font-family: 'Kumbh Sans', sans-serif;
-    width: 57vw;
-    height: 4vh;
-    margin-left: 0%;
+    width: 13vw;
+    margin-left: 1vw;
+
 }

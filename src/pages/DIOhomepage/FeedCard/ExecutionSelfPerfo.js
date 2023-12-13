@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import "./ExecutionSelfPerfo.css";
 import personna from '../../../images/icones/personna.png';
 import useCountdown from "./../useCountdown";
+import logo5 from "../../../images/logo5.png";
 
-const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,selfReactivity,clickreview ,showceopop,currentExecution}) => {
+const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,
+  selfReactivity,clickreview ,showceopop,currentExecution , ceo_comments ,ceo_expectations, ceo_reactivity  }) => {
   const DEADLINES = {
     DEAD1: 24,
     DEAD2: 48,
@@ -20,6 +22,7 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   
   const difficulty =['Easy','Challenging','Hard','Very hard']
   const reactivity =[ 'Cool','On the Spot', 'Over expectation' ,'Prodigious']
+  const expectations =['Acceptable','Meet expectations','Over expectations','Excellent']
   const values = [1, 4, 10, 20]
   departHours=values[selfDifficulty]*values[selfReactivity]
   departHours=Math.ceil(departHours*(1 + ExC + ExCP))
@@ -48,6 +51,9 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   const [showDetails, setShowDetails] = useState(false);
 
   const [showPeerReview, setShowPeerReview] = useState(false);
+  const divStyle = { // Taille de police plus grande
+    fontWeight: 'bold', // Poids de police plus épais
+  };
 
   const handlePeerReviewClick = () => {
     setShowPeerReview(true);
@@ -64,34 +70,33 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <div className="first">
       <div className="left">
       <div className="first-row">
-      <div className="creator">Creator : {talent}</div>
-      <div className="statut">Status : {status}</div>
-      <div className="count-down">{showCountdown ? (
+      <div className="creator">Creator : <div style={divStyle}>{talent}</div> </div>
+      <div className="statut">Status :<div style={divStyle}>  {status}</div></div>
+      <div className="count-down" >{showCountdown ? (
         <>
-          <p>{`${hours}H:${minutes}Mn:${seconds}s`}</p>
+          <p >Review Countdown <div style={divStyle}>{`${hours}H:${minutes}Mn:${seconds}s`}</div></p>
         </>
       ) : (
         <>
-          <p>No deadline</p>
+          <p style={divStyle}>No Review Countdown</p>
         </>
       )}</div>
       </div>
       <div className="description-diopage">
-      <div>Describe what we should do : </div>
-      <div>{description}</div>
+      <div>Execution description :<div style={divStyle}>{description}</div></div>
       </div>
       </div>
       <div className="right">
         <img className="profile" src={personna} />
-        <div className="name"> Performer :{talent} </div>
+        <div className="name"> Performer : <div style={divStyle}> {talent} </div></div>
         <div className="thanks-score">
         {showThanks ? (
         <>
-          <p>Thanks : {departHours}</p>
+          <p>Thanks :<div style={divStyle}>{departHours}</div>  <img className="symbole_th" src={logo5} /></p>
         </>
       ) : (
         <>
-          <p>Thanks : not yet</p>
+          <p>Thanks :<div style={divStyle}> Not Yet</div></p>
         </>
       )}</div>
 
@@ -107,25 +112,33 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <div>Doc 1 uploaded or link </div>
       <div>Doc 2 uploaded or link</div>
       </div>
-      <div className="comments">commentaire : {comments}</div>
+      <div className="comments"><div>Comment :</div><div style={divStyle}> {comments} </div> </div>
       </div>
       </div>
       <div className="right-second">
-        <div className="auto-eval">Auto Evaluation :
-        Difficulty : 
-        {difficulty[selfDifficulty]}
-        Reactivity: 
-        {reactivity[selfReactivity]}
+        <div className="auto-eval"><div>Auto Evaluation:</div>
+        <div className="dif-rea">Difficulty :<div style={divStyle}>{difficulty[selfDifficulty]}</div></div>
+        <div className="dif-rea">Reactivity: <div style={divStyle}>{reactivity[selfReactivity]}</div> </div>
         </div>
       </div>
       </div>
       <div className="add-second">
+      <div className="peer-review">
         <div>Anonyme Peer review 1 Feedback with Choice on Result and Reactivity</div>
         <div>Anonyme Peer review 2 Feedback with Choice on Result and Reactivity</div>
         <div>Anonyme Peer review n Feedback with Choice on Result and Reactivity</div>
       </div>
       <div className="ceo-eval">
-        <div>CEO Evaluation Feedback with Choice on Result and Reactivity</div>
+        {ceo_comments === null && ceo_expectations ===null && ceo_reactivity===null ? (        
+        <div>CEO Evaluation :<div style={divStyle}> Not Yet</div> </div>
+        ):(
+          <div>
+          <div>CEO Evaluation :<div style={divStyle}> {ceo_comments} </div> </div>
+          <div>  Expectations :<div style={divStyle}> {expectations[ceo_expectations]} </div></div>  
+          <div>Reactivity :<div style={divStyle}> {reactivity[ceo_reactivity]} </div></div>
+          </div>
+        )}
+      </div>
       </div>
       </div>
       )}
@@ -133,9 +146,11 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         {showDetails ? '-' : '+'}
       </button>
       {localStorage.getItem("isCEO") === "1" ? (   
-      <button className="review"  onClick={() => showceopop(id)}>CEO Evaluation</button>
+       ceo_comments === null && status !=="Achieved" && (
+      <button className="review"  onClick={() => showceopop(id)}><div style={divStyle}> CEO Evaluation</div></button>
+        )
         ) : (
-      <button className="review"  onClick={clickreview}>Make a review</button>
+      <button className="review"  onClick={clickreview}><div style={divStyle}> Make a review</div></button>
       )}
       </div>
     </div>

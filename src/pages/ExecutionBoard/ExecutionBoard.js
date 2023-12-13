@@ -24,6 +24,8 @@ import ExecutionCreation from "../DIOhomepage/ExecutionCreation";
 import { TasksContext } from "../TasksContext";
 
 
+
+
 const ExecutionBoard = () => {
 
   const { dioTasks } = useContext(TasksContext);
@@ -36,6 +38,9 @@ const ExecutionBoard = () => {
   const [showPopUpAttribution, setShowPopUpAttribution] = useState(false);
   const [createExecutionText, setCreateExecutionText] = useState("");
   const [WorkText, setWorkText] = useState("");
+  const [CommentCEO, setCommentCEO] = useState("");
+
+  let [currentExecution, setCurrentExecution] = useState(null);
 
   const [showPopUpCEO, setShowPopUpCEO] = useState(false);
   const [ceoReview, setCeoReview] = useState(false);
@@ -60,6 +65,10 @@ const ExecutionBoard = () => {
 
   const handlePeerReviewClick = () => {
     setShowPeerReview(true);
+  };
+  let handleCEOReview = (executionId) => {
+    setCurrentExecution(executionId); // Set the ID of the execution card clicked
+    setShowPopUpCEO(true); // Toggle the CEO review popup
   };
 
   const [selectedStatus, setSelectedStatus] = useState("All"); // Initialize with "All" or any default value
@@ -101,29 +110,37 @@ const ExecutionBoard = () => {
       case "In review":
         return (
           <ExecutionInReview
-            id={execution.id}
-            description={execution.exec_description}
-            talent={execution.talent_name}
-            status={execution.status_}
-            comments={execution.comments_}
-            selfDifficulty ={execution.difficulty}
-            selfReactivity ={execution.reactivity}
-            clickreview={handlePeerReviewClick}
-            showceopop={setShowPopUpCEO}
+          id={execution.id}
+          description={execution.exec_description}
+          talent={execution.talent_name}
+          status={execution.status_}
+          comments={execution.review_comments}
+          selfDifficulty ={execution.difficulty}
+          selfReactivity ={execution.review_reactivity}
+          clickreview={handlePeerReviewClick}
+          showceopop={() => handleCEOReview(execution.id) }
+          currentExecution={() =>{ setCurrentExecution(execution.id)}}
+          ceo_comments={execution.ceo_comments}
+          ceo_expectations={execution.expectations}
+          ceo_reactivity={execution.ceo_reactivity}
           />
         );
         case "Achieved":
           return (
             <ExecutionInReview
-              id={execution.id}
-              description={execution.exec_description}
-              talent={execution.talent_name}
-              status={execution.status_}
-              comments={execution.comments_}
-              selfDifficulty ={execution.difficulty}
-              selfReactivity ={execution.reactivity}
-              clickreview={handlePeerReviewClick}
-              showceopop={setShowPopUpCEO}
+            id={execution.id}
+            description={execution.exec_description}
+            talent={execution.talent_name}
+            status={execution.status_}
+            comments={execution.review_comments}
+            selfDifficulty ={execution.difficulty}
+            selfReactivity ={execution.review_reactivity}
+            clickreview={handlePeerReviewClick}
+            showceopop={() => handleCEOReview(execution.id) }
+            currentExecution={() =>{ setCurrentExecution(execution.id)}}
+            ceo_comments={execution.ceo_comments}
+            ceo_expectations={execution.expectations}
+            ceo_reactivity={execution.ceo_reactivity}
             />
           );
       default:
@@ -158,8 +175,9 @@ const ExecutionBoard = () => {
           />
       ) : ceoReview ? (
         <CEOReview
-          executionId={executionId}
-          setShowEvaluation={setCeoReview}
+        executionId={currentExecution}
+        setShowEvaluation={setCeoReview}
+        comments={CommentCEO}
         /> 
       ) : (
         <div className="main-content">
@@ -173,7 +191,7 @@ const ExecutionBoard = () => {
         <select value={selectedStatus} onChange={handleStatusChange}>
         <option value="All">All</option>
         <option value="Not assigned">My Ongoing</option>
-        <option value="In review">Peer Reviews</option>
+        <option value="In review">CEO Evaluation</option>
         <option value="In progress">Execution Authorization</option>
         </select>
         ) : (
@@ -188,7 +206,7 @@ const ExecutionBoard = () => {
           </div>
           <div className="execution-container">
           <div className="messages" ref={myDivRef}         style={{
-          height: '55vh', // Adjust height as needed
+          height: '62vh', // Adjust height as needed
           overflowY: 'scroll',
           marginBottom:'0px' // Optional, might not work in all browsers
         }}>{feed.reverse()}</div>
@@ -218,6 +236,8 @@ const ExecutionBoard = () => {
               setShowPopUpWork={setShowPopUpWork}
               setSelfReview={setCreationExecutionWorkAlreadyDone}
               setExecutionId={setExecutionId}
+              WorkText={WorkText}
+              setWorkText={setWorkText}
             />
           )}
           {showPopUpAttribution && (
@@ -231,7 +251,8 @@ const ExecutionBoard = () => {
            <CEOreviewPopUp
            setShowPopUpCEO={setShowPopUpCEO}
            setCEOReview={setCeoReview}
-           setExecutionId={setExecutionId}
+           comments={CommentCEO}
+           setComments={setCommentCEO}
            />
           )}
         </div>

@@ -72,6 +72,13 @@
   background-color: #63798a;
   font-size: 170%;
 }
+
+.sidebar-section-link.active {
+  /* Your desired styles for active section here */
+  background-color: gray; /* Change this to the color you want */
+  border: 1px solid white;
+  /* Other styles */
+}
 .sidebar-section-link > span {
   border-bottom: none; /* Remove the line below the text */
 }

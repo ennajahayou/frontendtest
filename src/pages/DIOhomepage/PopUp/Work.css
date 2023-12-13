@@ -23,9 +23,9 @@
     padding: 50px;
     background-color: rgb(211, 208, 208);
     border-radius: 20px;
-    width: 70%;
+    width: 27vw;
     height: 10%;
-    margin: 0 auto;
+    margin-top: 2vh auto;
     font-family: 'Kumbh Sans', sans-serif;
     color: black;
     
@@ -40,4 +40,30 @@
     margin-right: 60%;
     font-size: 200%;
     font-weight: 200%;
+  }
+
+  .circle {
+    width: 4vw;
+    height: 3vh;
+    border-radius: 50%;
+    background-color: grey;
+    margin-left: 1vw;
+  }
+  
+  .input-circle{
+    display: flex;
+  }
+  
+  .span{
+    flex-direction: column;
+    margin-left: 1%;
+    margin-right: 50%;
+    margin-top: 5%;
+    font-family: 'Kumbh Sans', sans-serif;
+
+  }
+  
+  .span-text{
+    margin-left: 1%;
+    width: 100%;
   }

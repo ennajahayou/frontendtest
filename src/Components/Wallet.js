@@ -38,9 +38,9 @@ import axios from 'axios';
           <h4> Next revenu</h4>
       </div>
       <div className="row-container">
-              <div className="row-item">{totalThanks * 12150}€ </div>
+              <div className="row-item">0€ </div>
               <div className="row-item"> {totalThanks} <img className="symbole_th" src={logo5} /></div>
-              <div className="row-item">8 200€</div>
+              <div className="row-item">0€</div>
           </div>
   </div>
   <div>
