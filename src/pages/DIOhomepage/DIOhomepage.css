@@ -197,11 +197,34 @@ h1,
   margin-left: 5vw;
   margin-right: 5vw;
   border-radius: 8px;
-  background-color: white; /* Espace à l'intérieur des rectangles */
+  color: #305E7E; /* Espace à l'intérieur des rectangles */
   margin-bottom: 1vh;
   margin-top: 0px; /* Espace entre les rectangles */
   border: 1px solid #ccc; /* Bordure autour des rectangles */; /* Coins arrondis */
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+/* Style the search icon */
+
+
+/* Style the loop icon */
+.barre-reche::after {
+  content: '\1F50D'; /* Unicode for the loop icon */
+  position: absolute;
+  top: 45%;
+  left: 63vw;
+  transform: translateY(-50%);
+  color: #888;
+  filter: grayscale(100%);
+  cursor: pointer;
+}
+
+.barre-reche input::placeholder {
+  color: #888;
+  left: 0.5vw;
+  position: absolute;
+  top: 15%;
+  font-size: 120%;
 }

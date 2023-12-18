@@ -8,7 +8,9 @@ const SubmitionPopUp = ({
   setSelfReview,
   setExecutionId,
   workText,
-  setWorkText
+  setWorkText,
+  link,
+  setLink
 }) => {
   // TODO: add real information in jsonData
 
@@ -18,13 +20,44 @@ const SubmitionPopUp = ({
     setExecutionId(0);
   };
 
+  const [file, setFile] = useState(null); // State to store uploaded file
+  const [linkInputVisible, setLinkInputVisible] = useState(false); // State to manage link input visibility
+
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+  };
+
+  const handleLinkChange = (event) => {
+    setLink(event.target.value);
+  };
+
+  const handleAddFilesClick = () => {
+    // Trigger file input click
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+      fileInput.click();
+    }
+  };
+
+  const handleAddLinkClick = () => {
+    setLinkInputVisible(true);
+  };
+
+
 
 
   return (
     <div className="submition-pop-up-work">
     <h2>My work</h2>
 
-
+    <input
+        id="fileInput"
+        type="file"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
     <input
       className="evaluation-textarea"
       placeholder="Commentaire..."
@@ -33,10 +66,26 @@ const SubmitionPopUp = ({
     />
 
 
-    <div className="span">
-    <div className="files"><span class="circle"></span><div className="span-text">Add Files </div></div>
-    <div className="files"><span class="circle"></span><div className="span-text">Add Link</div></div>
+    <div className="spane">
+    <div className="buttons">
+    <button className="files" onClick={handleAddFilesClick}><span class="circle"></span><div className="span-text">Add Files </div></button>
+    <button className="files" onClick={handleAddLinkClick}><span class="circle"></span><div className="span-text">Add Link</div></button>
     </div>
+
+      {linkInputVisible && (
+        <input
+          type="text"
+          placeholder="Enter link"
+          value={link}
+          onChange={(e) => {
+            setLink(e.target.value);
+          }}
+          style={{ height: "3vh", fontSize: "80%",backgroundColor:"transparent" , width: "20vw" }}
+        />
+        )}
+
+    </div>
+
     <button
       className="evaluation-button1"
       onClick={handleClick}

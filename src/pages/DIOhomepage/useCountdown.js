@@ -1,32 +1,30 @@
-// useCountdown.js
 import { useState, useEffect } from 'react';
 
-const useCountdown = (departHours = 24) => {
+const useCountdown = (departSeconds ) => {
   const [timer, setTimer] = useState({
-    hours: departHours,
-    minutes: 0,
-    seconds: 0,
+    hours: Math.floor(departSeconds / 3600),
+    minutes: Math.floor((departSeconds % 3600) / 60),
+    seconds: departSeconds % 60,
   });
 
   useEffect(() => {
     let interval;
-    //let startTime = localStorage.getItem('countdownStartTime');
+    let startTime = localStorage.getItem('countdownStartTime');
 
     // Si le temps initial n'est pas dans le stockage local, l'initialiser
-
-      let startTime = Date.now();
+   
+      startTime = Date.now();
       localStorage.setItem('countdownStartTime', startTime);
 
+    const endTime = parseInt(startTime, 10) + departSeconds * 1000;
 
-    const endTime = parseInt(startTime, 10) + departHours * 3600 * 1000;
-  
     const updateTimer = () => {
       const now = Date.now();
-      const remainingTime = Math.max(0, endTime - now);
+      const remainingTime = Math.max(0, endTime - now) / 1000;
 
-      const hours = Math.floor(remainingTime / (3600 * 1000));
-      const minutes = Math.floor((remainingTime % (3600 * 1000)) / (60 * 1000));
-      const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+      const hours = Math.floor(remainingTime / 3600);
+      const minutes = Math.floor((remainingTime % 3600) / 60);
+      const seconds = Math.floor(remainingTime % 60);
 
       setTimer({
         hours,
@@ -39,14 +37,14 @@ const useCountdown = (departHours = 24) => {
       }
     };
 
-    updateTimer(); // Mettez à jour immédiatement pour éviter un délai d'affichage initial
+    updateTimer();
 
     interval = setInterval(updateTimer, 1000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [departHours]);
+  }, [departSeconds]);
 
   return timer;
 };

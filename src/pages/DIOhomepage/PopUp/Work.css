@@ -16,7 +16,7 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
   }
   
-  .submition-pop-up-work input{
+  .evaluation-textarea{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,16 +54,53 @@
     display: flex;
   }
   
-  .span{
-    flex-direction: column;
-    margin-left: 1%;
-    margin-right: 50%;
-    margin-top: 5%;
-    font-family: 'Kumbh Sans', sans-serif;
-
+  .spane{
+    margin-left: 0%;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: row;
   }
+
+
+
   
   .span-text{
     margin-left: 1%;
     width: 100%;
   }
+
+  .files{
+    height: 5vh;
+  }
+
+  .input-link{
+    height: 5vh;
+    margin-right: 1vw;
+
+  }
+  .spane input{
+    height: 5vh;
+    margin-left: 0vw;
+    right: 100vw;
+    width: 100vw;
+    top:0vh;
+    margin-top: 12%;
+  }
+
+  
+/* Add hover effect for the buttons */
+.span-text {
+  /* Your existing button styles */
+  background-color: transparent; /* Set the initial background color */
+  border-radius: 20%;
+  cursor: pointer;
+  /* Other button styles */
+
+  /* Add transition for a smooth effect */
+  transition: background-color 0.3s ease;
+}
+
+/* Define hover effect for the buttons */
+.span-text:hover {
+  background-color: lightgray; /* Change to the desired hover color */
+}

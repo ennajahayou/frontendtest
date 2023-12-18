@@ -150,14 +150,14 @@
     padding: 2%; 
 }
 
-.comments{
+.doc{
     font-size: 80%;
     background-color:  #474E5426; /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
     margin-bottom: 1vh;
     padding: 2%; 
     margin-left: 1%;
-    width: 7vw;
+    width: 10vw;
     flex-direction: column;
 }
 
@@ -173,7 +173,7 @@
     font-size: 90%;
 }
 
-.doc{
+.comments{
     font-size: 80%;
     background-color:  #474E5426; /* couleur du fond d'écran */
     border-radius: 15px; /* arrondit les coins */
@@ -182,7 +182,7 @@
     padding: 2%; /* espace à l'intérieur des bulles de message */
     color: black;
     font-family: 'Kumbh Sans', sans-serif;
-    width: 35vw;
+    width: 32vw;
     height: 8vh;
     margin-left: 0%;
 }

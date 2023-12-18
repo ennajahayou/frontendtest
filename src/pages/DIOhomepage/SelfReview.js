@@ -12,14 +12,15 @@ const SelfReview = ({
   executionDescription,
   setShowEvaluation,
   executionId,
-  executionComment
+  executionComment,
+  executionLink
 }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [difficulty, setDifficulty] = useState(0);
   const [workText, setWorkText] = useState("");
 
   const [departHours, setDepartHours] = useState(24); // Initialiser à une valeur par défaut
-  const { hours, minutes, seconds } = useCountdown(departHours);
+  const { hours, minutes, seconds } = useCountdown(departHours*3600);
   const [showCountdown, setShowCountdown] = useState(true);
 
   const handleDepartHours1 = (value) => {
@@ -103,7 +104,8 @@ const SelfReview = ({
           executionDescription: executionDescription,
           dioId: 1,
           texte: workText,
-          status:'In review'
+          status:'In review',
+          link: executionLink
         })
         .then((res) => {
           addProposition(executionDescription);
@@ -122,17 +124,34 @@ const SelfReview = ({
             )
             .then((res) => {
               const newDepartHours = res.data.data.responseValue;
-              handleDepartHours1(newDepartHours);
+
               let updatedStatut = "In review";
               if (newDepartHours < 6) {
                 updatedStatut = "Achieved";
               }
-              console.log(newDepartHours ,updatedStatut)
+              const DEADLINES = {
+                DEAD1: 24,
+                DEAD2: 48,
+                DEAD3: 72,
+              };
+              let remaining_time=3600*newDepartHours
+              console.log(updatedStatut,remaining_time)
+              if (newDepartHours > 6) {
+                if ((dataReview.difficulty === 4 && dataReview.index === 4)) {
+                  newDepartHours = DEADLINES.DEAD1;
+                } else if (dataReview.difficulty === 10 || dataReview.index === 10) {
+                  newDepartHours = DEADLINES.DEAD2 ;
+                } else if (dataReview.difficulty === 20 || dataReview.index === 20) {
+                  newDepartHours = DEADLINES.DEAD3 ;
+                };
+                remaining_time=3600*newDepartHours
+              }
+              handleDepartHours1(newDepartHours);
+              console.log(newDepartHours ,updatedStatut,remaining_time)
               setCurrentQuestion(3);
               axios
               .post(process.env.REACT_APP_BACKEND_URL + "/execution/updateStatus",
-              {executionId ,updatedStatut})
-
+              {executionId ,updatedStatut ,remaining_time});
       }
       );
       });

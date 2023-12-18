@@ -4,9 +4,26 @@ import "./ExecutionSelfPerfo.css";
 import personna from '../../../images/icones/personna.png';
 import useCountdown from "./../useCountdown";
 import logo5 from "../../../images/logo5.png";
+import axios from "axios";
+//import socket from "../../../socket";
 
 const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,
-  selfReactivity,clickreview ,showceopop,currentExecution , ceo_comments ,ceo_expectations, ceo_reactivity  }) => {
+  selfReactivity,clickreview ,showceopop , ceo_comments ,ceo_expectations, 
+  ceo_reactivity ,remainingTime,link , achievement_date ,ceoFeedback }) => {
+  
+   /* const [remainingtime, setRemainingTime] = useState(remainingTime);
+
+    useEffect(() => {
+      socket.on("remainingTimeUpdated", (updatedRemainingTime) => {
+        setRemainingTime(updatedRemainingTime);
+      });
+  
+      // Clean up the socket listener when component unmounts
+      return () => {
+        socket.off("remainingTimeUpdated");
+      };
+    }, []);*/
+  
   const DEADLINES = {
     DEAD1: 24,
     DEAD2: 48,
@@ -19,13 +36,14 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
 
   const [showCountdown, setShowCountdown] = useState(true);
   const [showThanks, setShowThanks] = useState(true);
-  
+  //let { hours, minutes, seconds } = useCountdown(3600*departHours);
   const difficulty =['Easy','Challenging','Hard','Very hard']
   const reactivity =[ 'Cool','On the Spot', 'Over expectation' ,'Prodigious']
   const expectations =['Acceptable','Meet expectations','Over expectations','Excellent']
   const values = [1, 4, 10, 20]
   departHours=values[selfDifficulty]*values[selfReactivity]
   departHours=Math.ceil(departHours*(1 + ExC + ExCP))
+
 
   if (departHours > 6) {
     if ((values[selfDifficulty] === 4 && values[selfReactivity] === 4)) {
@@ -34,12 +52,14 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       departHours = DEADLINES.DEAD2 ;
     } else if (values[selfDifficulty] === 20 || values[selfReactivity] === 20) {
       departHours = DEADLINES.DEAD3 ;
-    }
+    };
   }
-  let { hours, minutes, seconds } = useCountdown(departHours);
+
+
+  const { hours, minutes, seconds } = useCountdown(remainingTime);
 
   useEffect(() => {
-    if (departHours < 6) {
+    if (departHours < 6 && remainingTime == null) {
       setShowCountdown(false);
       setShowThanks(true);
     } else {
@@ -58,6 +78,7 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   const handlePeerReviewClick = () => {
     setShowPeerReview(true);
   };
+  const userName = localStorage.getItem('userName');
 
 
   const toggleDetails = () => {
@@ -65,22 +86,23 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   };
   return (
     <div>
-
     <div className="message bubble">
       <div className="first">
       <div className="left">
       <div className="first-row">
       <div className="creator">Creator : <div style={divStyle}>{talent}</div> </div>
       <div className="statut">Status :<div style={divStyle}>  {status}</div></div>
-      <div className="count-down" >{showCountdown ? (
-        <>
-          <p >Review Countdown <div style={divStyle}>{`${hours}H:${minutes}Mn:${seconds}s`}</div></p>
+      <div className="count-down" >{showCountdown  ? ( 
+        <>{status ==="In review" &&(
+          <p >Review Countdown <div style={divStyle}>{`${hours}H:${minutes}Mn`}</div></p>
+          )}
+          {<> </>}
         </>
       ) : (
         <>
-          <p style={divStyle}>No Review Countdown</p>
+          <p >Achievement Date :<div style={divStyle}>{achievement_date.substring(0,10)+"   "+achievement_date.substring(11,16)}</div></p>
         </>
-      )}</div>
+       )}</div>
       </div>
       <div className="description-diopage">
       <div>Execution description :<div style={divStyle}>{description}</div></div>
@@ -108,11 +130,13 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <div className="add-first">
       <div className="left">
       <div className="second-row">
-      <div className="doc">
-      <div>Doc 1 uploaded or link </div>
-      <div>Doc 2 uploaded or link</div>
+      <div className="comments">
+      <div>Comment :</div><div style={divStyle}> {comments} </div> 
       </div>
-      <div className="comments"><div>Comment :</div><div style={divStyle}> {comments} </div> </div>
+      <div className="doc">
+      <div>{link === "" ?(<p>No link uploaded</p>):( <p>Link 1 uploaded: <a href={link} target="_blank">Link 1</a>.</p>)}</div>
+
+        </div>
       </div>
       </div>
       <div className="right-second">
@@ -129,12 +153,12 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         <div>Anonyme Peer review n Feedback with Choice on Result and Reactivity</div>
       </div>
       <div className="ceo-eval">
-        {ceo_comments === null && ceo_expectations ===null && ceo_reactivity===null ? (        
+        {ceo_comments === null && ceo_expectations ===null && ceo_reactivity===null && status === "In review" ? (        
         <div>CEO Evaluation :<div style={divStyle}> Not Yet</div> </div>
-        ):(
+        ):status === "On going" ?(<div>CEO Evaluation :<div style={divStyle}> {ceoFeedback}</div> </div>):(
           <div>
           <div>CEO Evaluation :<div style={divStyle}> {ceo_comments} </div> </div>
-          <div>  Expectations :<div style={divStyle}> {expectations[ceo_expectations]} </div></div>  
+          <div> Expectations :<div style={divStyle}> {expectations[ceo_expectations]} </div></div>  
           <div>Reactivity :<div style={divStyle}> {reactivity[ceo_reactivity]} </div></div>
           </div>
         )}
@@ -146,11 +170,11 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         {showDetails ? '-' : '+'}
       </button>
       {localStorage.getItem("isCEO") === "1" ? (   
-       ceo_comments === null && status !=="Achieved" && (
+       ceo_comments === null && status ==="In review" && talent !== userName && (
       <button className="review"  onClick={() => showceopop(id)}><div style={divStyle}> CEO Evaluation</div></button>
         )
-        ) : (
-      <button className="review"  onClick={clickreview}><div style={divStyle}> Make a review</div></button>
+        ) :status ==="In review" && talent !== userName && (
+      <button className="review"  onClick={() => clickreview(id)}><div style={divStyle}> Make a review</div></button>
       )}
       </div>
     </div>

@@ -8,11 +8,16 @@ const CEOreviewPopUp = ({
   comments,
   setComments,
   setExecutionId,
+  setName,
+  executor,
+  setCEONotYet,
+  link
 
 }) => {
   // TODO: add real information in jsonData
   const handleClickNotYet = () => {
     setShowPopUpCEO(false);
+    setCEONotYet(true);
   };
 
   const handleClickClose = () => {
@@ -28,11 +33,11 @@ const CEOreviewPopUp = ({
 
   return (
     <div className="submition-pop-up-work-ceo">
-    <h2>My work</h2>
+    <h2>{executor}'s work</h2>
     <div className="input-circle">
     <div className="span">
     <div className="files"><span class="circle"></span><div className="span-text">Files 1</div></div>
-    <div className="files"><span class="circle"></span><div className="span-text">Link</div></div>
+    <div className="files"><span class="circle"></span><div className="span-text"><a href={link} target="_blank">Link</a></div></div>
     </div>
     <input
       className="evaluation-textarea"

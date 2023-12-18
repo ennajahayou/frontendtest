@@ -79,12 +79,19 @@ const ExecutionBoard = () => {
 
   // Filter executions based on the selected status
   const filteredExecutions = dioTasks.filter((execution) => {
+    const userName = localStorage.getItem('userName');
     if (selectedStatus === "All") {
       return true; // Show all executions if "All" is selected
-    } else {
+    } else if(selectedStatus === "My Ongoing"){
+      return execution.talent_name === userName && execution.status_ !=="Achieved";
+    } else if(selectedStatus === "CEO Evaluation" || selectedStatus === "Peer Review"){
+      return execution.status_ ==="In review" && execution.talent_name !== userName && execution.ceo_comments ===null
+    }
+    else {
       return execution.status_ === selectedStatus;
     }
   });
+  filteredExecutions.sort((a, b) => a.id - b.id);
 
   const feed = filteredExecutions.map((execution) => {
     switch (execution.status_) {
@@ -123,6 +130,7 @@ const ExecutionBoard = () => {
           ceo_comments={execution.ceo_comments}
           ceo_expectations={execution.expectations}
           ceo_reactivity={execution.ceo_reactivity}
+          remainingTime={execution.remaining_time}
           />
         );
         case "Achieved":
@@ -190,15 +198,15 @@ const ExecutionBoard = () => {
           {localStorage.getItem("isCEO") === "1" ? (   
         <select value={selectedStatus} onChange={handleStatusChange}>
         <option value="All">All</option>
-        <option value="Not assigned">My Ongoing</option>
-        <option value="In review">CEO Evaluation</option>
+        <option value="My Ongoing">My Ongoing</option>
+        <option value="CEO Evaluation">CEO Evaluation</option>
         <option value="In progress">Execution Authorization</option>
         </select>
         ) : (
           <select value={selectedStatus} onChange={handleStatusChange}>
           <option value="All">All</option>
           <option value="Not assigned">My Ongoing</option>
-          <option value="In review">Peer Reviews</option>
+          <option value="Peer Review">Peer Reviews</option>
           </select>
       )}
 
@@ -209,7 +217,7 @@ const ExecutionBoard = () => {
           height: '62vh', // Adjust height as needed
           overflowY: 'scroll',
           marginBottom:'0px' // Optional, might not work in all browsers
-        }}>{feed.reverse()}</div>
+        }}>{feed}</div>
         </div>
           <ExecutionMessaging
               createExecutionText={createExecutionText}
