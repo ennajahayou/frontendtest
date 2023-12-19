@@ -1,6 +1,7 @@
 import "./PopupFeed.css";
 // import { useContext } from "react";
 // import { TasksContext } from "../../TasksContext";
+import { useState, useContext, useEffect, useRef } from "react";
 
 const WorkDonePopUp = ({
   setShowPopUpWorkDone,
@@ -20,8 +21,23 @@ const WorkDonePopUp = ({
     setShowPopUpWork(true);
   };
 
+  const popUpRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+        setShowPopUpWorkDone(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setShowPopUpWorkDone]);
+
   return (
-    <div className="submition-pop-up">
+    <div ref={popUpRef} className="submition-pop-up">
       <button className="submitButton" onClick={handleClickNotDone}>
         Not done
       </button>

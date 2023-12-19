@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import "./CEOreviewPopUp.css";
 
 const CEOreviewPopUp = ({
@@ -20,7 +20,7 @@ const CEOreviewPopUp = ({
     setCEONotYet(true);
   };
 
-  const handleClickClose = () => {
+  const handleClickrelease = () => {
     setShowPopUpCEO(false);
   };
 
@@ -29,10 +29,26 @@ const CEOreviewPopUp = ({
     setCEOReview(true);
   };
 
+  const popUpRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+        setShowPopUpCEO(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setShowPopUpCEO]);
+
 
 
   return (
-    <div className="submition-pop-up-work-ceo">
+    <div ref={popUpRef} className="submition-pop-up-work-ceo">
     <h2>{executor}'s work</h2>
     <div className="input-circle">
     <div className="span">
@@ -55,9 +71,9 @@ const CEOreviewPopUp = ({
     </button>
     <button
       className="button2"
-      onClick={handleClickClose}
+      onClick={handleClickrelease}
     >     
-      Close
+      release
     </button>
     <button
       className="button3"

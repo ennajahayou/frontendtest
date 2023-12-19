@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import "./Work.css";
 
 const SubmitionPopUp = ({
@@ -24,6 +24,7 @@ const SubmitionPopUp = ({
   const [linkInputVisible, setLinkInputVisible] = useState(false); // State to manage link input visibility
 
 
+
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
@@ -45,11 +46,38 @@ const SubmitionPopUp = ({
     setLinkInputVisible(true);
   };
 
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    // Vérifie si la longueur du texte est inférieure ou égale à 150 caractères
+    if (inputValue.length <= 150) {
+      setWorkText(inputValue);
+    } else if (inputValue.length > 150) {
+      // If the input exceeds 150 characters, truncate the input to 150 characters
+      e.preventDefault();
+    }
+  };
+
+  const popUpRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+        setShowPopUpWork(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setShowPopUpWork]);
+
 
 
 
   return (
-    <div className="submition-pop-up-work">
+    <div ref={popUpRef} className="submition-pop-up-work">
     <h2>My work</h2>
 
     <input
@@ -62,7 +90,7 @@ const SubmitionPopUp = ({
       className="evaluation-textarea"
       placeholder="Commentaire..."
       value={workText}
-      onChange={(e) => setWorkText(e.target.value)}
+      onChange={handleInputChange}
     />
 
 

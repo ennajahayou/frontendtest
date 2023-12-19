@@ -40,23 +40,23 @@ function Sidebar  () {
        <img className="icon" src={message} /><span>My Feed</span>
    </Link>
    <Link to="/ExecutionBoard" onClick={() => {window.location.href = "/ExecutionBoard"; }} className={`sidebar-section-link ${activeSection === "/ExecutionBoard" ? 'active' : ''}`}>
-       <img src={story}  />My Work Board
+       <img src={story}  /><span>My Work Board</span>
    </Link>
     <Link to="/Idea" onClick={() => {window.location.href = "/Idea"; }} className={`sidebar-section-link ${activeSection === "/Idea" ? 'active' : ''}`}>
-        <img src={idee}  />Push an Idea
+        <img src={idee}  /><span>Push an Idea</span>
     </Link>
     <Link to="/Co-opt" onClick={() => {window.location.href = "/Co-opt"; }} className={`sidebar-section-link ${activeSection === "/Co-opt" ? 'active' : ''}`}>
-        <img src={poignee}  />Co-opt Talent
+        <img src={poignee}  /><span>Co-opt Talent</span>
     </Link>
        <Link to="/Archives" onClick={() => {window.location.href = "/Archives"; }} className={`sidebar-section-link ${activeSection === "/Archives" ? 'active' : ''}`}>
-        <img src={archiver}  />My Archives
+        <img src={archiver}  /><span>My Archives</span>
         </Link>
     <Link to="/CEOprerogatives" onClick={() => {window.location.href = "/CEOprerogatives"; }} className={`sidebar-section-link ${activeSection === "/CEOprerogatives" ? 'active' : ''}`}>
-       <img src={poignee}  />CEO Prerogatives 
+       <img src={poignee}  /> <span>CEO Prerogatives</span>
     </Link>
     <div className="sidebar-section espace"></div>
     <button className="sidebar-section">
-      <img/>My Settings
+      <img/><span>My Settings</span>
       </button>
   </div>
    )

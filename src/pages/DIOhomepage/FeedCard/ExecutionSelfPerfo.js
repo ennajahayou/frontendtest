@@ -90,7 +90,7 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <div className="first">
       <div className="left">
       <div className="first-row">
-      <div className="creator">Creator : <div style={divStyle}>{talent}</div> </div>
+      <div className="creator">Creator :<div style={divStyle}>{talent}</div> </div>
       <div className="statut">Status :<div style={divStyle}>  {status}</div></div>
       <div className="count-down" >{showCountdown  ? ( 
         <>{status ==="In review" &&(
@@ -110,7 +110,7 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       </div>
       <div className="right">
         <img className="profile" src={personna} />
-        <div className="name"> Performer : <div style={divStyle}> {talent} </div></div>
+        <div className="name"> <div style={divStyle}> {talent} </div></div>
         <div className="thanks-score">
         {showThanks ? (
         <>

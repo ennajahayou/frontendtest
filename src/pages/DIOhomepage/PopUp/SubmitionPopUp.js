@@ -1,5 +1,6 @@
 import axios from "axios";
 import "./PopupFeed.css";
+import { useState, useContext, useEffect, useRef } from "react";
 
 const SubmitionPopUp = ({
   executionDescription,
@@ -43,8 +44,23 @@ const SubmitionPopUp = ({
     // setShowPopUp(false);
   };
 
+  const popUpRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+        setShowPopUp(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setShowPopUp]);
+
   return (
-    <div className="submition-pop-up">
+    <div ref={popUpRef} className="submition-pop-up">
       <button className="submitButton" onClick={handleClickMyself}>
         I want to do it
       </button>

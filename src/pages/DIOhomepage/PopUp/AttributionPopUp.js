@@ -1,5 +1,5 @@
 import "./PopupFeed.css";
-
+import { useState, useContext, useEffect, useRef } from "react";
 import axios from "axios";
 
 const AttributionPopUp = ({
@@ -19,8 +19,24 @@ const AttributionPopUp = ({
     setSelfReview(true);
   };
 
+  const popUpRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+        setShowPopUpAttribution(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setShowPopUpAttribution]);
+
   return (
-    <div className="submition-pop-up">
+    <div ref={popUpRef}  className="submition-pop-up">
       <button className="submitButton" onClick={handleClickNotDone}>
         Not done
       </button>

@@ -2,7 +2,7 @@
 .sidebar {
     background-color: rgb(0, 88, 139);
     color: white;
-    width: 24.84vw;	   
+    width: 20vw;	   
     height: 97vh;
     display: flex;
     flex-direction: column;
@@ -15,8 +15,8 @@
   position: relative;
   justify-content: right;
   /* Ajustez la taille si nécessaire */
-  width: 15vw;	 /* Largeur de l'image */
-  height: 20vh;  /* Hauteur exemple */
+  width: 13vw;	 /* Largeur de l'image */
+  height: 18vh;  /* Hauteur exemple */
 }
 
 .sidebar-section-image {
@@ -31,7 +31,7 @@
   cursor: pointer; 
   transition: background-color 0.3s;
   font-family: 'Kumbh Sans', sans-serif;
-  width: 24.84vw;	 
+  width: 20vw;	 
   height: 24vh;
   flex-basis: 1;
   background-color: #63798a;
@@ -49,10 +49,17 @@
     cursor: pointer; 
     transition: background-color 0.3s;
     font-family: 'Kumbh Sans', sans-serif;
-    width: 24.84vw;	
+    width: 20vw;	
     flex-basis: 1;
     background-color: #63798a;
     font-size: 170%;
+    overflow: hidden;
+}
+
+.sidebar-section > span {
+  border-bottom: none;
+  font-size: 80%;
+  overflow: hidden; /* Remove the line below the text */
 }
 
 .sidebar-section-link {
@@ -66,11 +73,12 @@
   cursor: pointer; 
   transition: background-color 0.3s;
   font-family: 'Kumbh Sans', sans-serif;
-  width: 24.84vw;	
+  width: 20vw;	
   height: 12vh;
   flex-basis: 1;
   background-color: #63798a;
   font-size: 170%;
+  overflow: hidden;
 }
 
 .sidebar-section-link.active {
@@ -80,7 +88,8 @@
   /* Other styles */
 }
 .sidebar-section-link > span {
-  border-bottom: none; /* Remove the line below the text */
+  border-bottom: none;
+  font-size: 80%; /* Remove the line below the text */
 }
 .sidebar-section-link,
 .sidebar-section-link > * {
