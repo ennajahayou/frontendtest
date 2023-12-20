@@ -223,11 +223,15 @@ const DIOhomepage = () => {
           {/* Messaging */}
           <div className="messaging-container" >
               <div className="messages" ref={myDivRef}         style={{
-          height: '62vh', // Adjust height as needed
-          overflowY: 'scroll',
-          marginBottom:'0px' // Optional, might not work in all browsers
+              height: '62vh', // Adjust height as needed
+              overflowY: 'scroll',
+              marginBottom:'0px',
+              marginLeft: '2.2vw',
+              paddingRight: '2.8vw',
+              scrollbarWidth: '20px', // Largeur de la barre de défilement
+              scrollbarColor: '#ccc #f4f4f4'
+               // Optional, might not work in all browsers
         }}>{feed}</div>
-
           </div>
           <ExecutionMessaging
               createExecutionText={createExecutionText}

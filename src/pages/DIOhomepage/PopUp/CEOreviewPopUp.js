@@ -49,7 +49,7 @@ const CEOreviewPopUp = ({
 
   return (
     <div ref={popUpRef} className="submition-pop-up-work-ceo">
-    <h2>{executor}'s work</h2>
+    <h2 style={{wordWrap: 'break-word'} }>{executor}'s work</h2>
     <div className="input-circle">
     <div className="span">
     <div className="files"><span class="circle"></span><div className="span-text">Files 1</div></div>
