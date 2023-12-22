@@ -55,7 +55,7 @@ const CEOProfil = () => {
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/ceoprofil/acceptExecution", {
         executionId: task.id,
-      })
+      },)
       .then((res) => {
         removeTask(task.id);
       });

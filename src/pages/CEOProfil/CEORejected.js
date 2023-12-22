@@ -1,9 +1,9 @@
-import "./CEONotYet.css";
+import "./CEORejected.css";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const CEONotYet = ({ executionId, setShowEvaluation ,setShowPopUpCEO ,comments , feedback, setFeedback}) => {
+const CEORejected = ({ executionId, setShowEvaluation ,setShowPopUpCEO ,comments , feedback, setFeedback}) => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [expectations, setExpectations] = useState(0);
 
@@ -14,12 +14,14 @@ const CEONotYet = ({ executionId, setShowEvaluation ,setShowPopUpCEO ,comments ,
   const token = Cookies.get("token");
 
   const handleSubmit = (index) => {
+
+    const status = document.getElementById('case').checked ? 'Open' : 'Rejected';
     const data = {
       executionId: executionId,
       feedback: feedback,
-      status:"On going"
+      status: status
     };
-    axios.post(process.env.REACT_APP_BACKEND_URL + "/execution/NotYet", data, {
+    axios.post(process.env.REACT_APP_BACKEND_URL + "/execution/Rejected", data, {
       headers: {
         Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
       },
@@ -35,9 +37,13 @@ const CEONotYet = ({ executionId, setShowEvaluation ,setShowPopUpCEO ,comments ,
 
             <input className="input-feed"  placeholder="describe it here..."   value={feedback}
             onChange={(e) => setFeedback(e.target.value)}></input>
+            <div className="propose">
+            <input className="case" type="checkbox" id="case"/>
+            <label  for="case">Propose it again to talents</label> 
+            </div>
           <button
             className="feedback"
-            onClick={() => handleSubmit() }
+            onClick={handleSubmit }
             //setShowEvaluation(false)}
           >
             Send Your feed back  ➡
@@ -48,4 +54,4 @@ const CEONotYet = ({ executionId, setShowEvaluation ,setShowPopUpCEO ,comments ,
   );
 };
 
-export default CEONotYet;
+export default CEORejected;

@@ -6,6 +6,7 @@ import useCountdown from "./useCountdown";
 import righthand from '../../images/icones/hand-right.png';
 import lefthand from '../../images/icones/hand-left.png';
 import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 
 const SelfReview = ({
@@ -27,6 +28,7 @@ const SelfReview = ({
     const roundedValue = Math.ceil(value);
     setDepartHours(roundedValue);
   };
+  const token = Cookies.get("token");
 
   useEffect(() => {
     if (departHours < 6) {
@@ -83,7 +85,12 @@ const SelfReview = ({
       axios
         .post(
           process.env.REACT_APP_BACKEND_URL + "/review/selfReview",
-          dataReview
+          dataReview,
+          {
+          headers: {
+            Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
+          },
+        }
         )
         .then((res) => {
           const newDepartHours = res.data.data.responseValue;
@@ -96,6 +103,10 @@ const SelfReview = ({
         executionId: executionId,
         userId: localStorage.getItem("userId"),
         execContent: "Work already done",
+      },              {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
+        },
       });
     } else {
       axios
@@ -106,6 +117,10 @@ const SelfReview = ({
           texte: workText,
           status:'In review',
           link: executionLink
+        },              {
+          headers: {
+            Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
+          },
         })
         .then((res) => {
           addProposition(executionDescription);
@@ -120,7 +135,12 @@ const SelfReview = ({
           axios
             .post(
               process.env.REACT_APP_BACKEND_URL + "/review/selfReview",
-              dataReview
+              dataReview,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
+                },
+              }
             )
             .then((res) => {
               const newDepartHours = res.data.data.responseValue;
@@ -151,7 +171,13 @@ const SelfReview = ({
               setCurrentQuestion(3);
               axios
               .post(process.env.REACT_APP_BACKEND_URL + "/execution/updateStatus",
-              {executionId ,updatedStatut ,remaining_time});
+              {executionId ,updatedStatut ,remaining_time},
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
+                },
+              });
+              
       }
       );
       });
@@ -165,25 +191,25 @@ const SelfReview = ({
         <>
           <h2>How difficult was it?</h2>
           <button
-            className="evaluation-button"
+            className="evaluation-button-selfreview"
             onClick={() => handleDifficultyClick(0)}
           >
             Easy
           </button>
           <button
-            className="evaluation-button"
+            className="evaluation-button-selfreview"
             onClick={() => handleDifficultyClick(1)}
           >
             Challenging
           </button>
           <button
-            className="evaluation-button"
+            className="evaluation-button-selfreview"
             onClick={() => handleDifficultyClick(2)}
           >
             Hard
           </button>
           <button
-            className="evaluation-button"
+            className="evaluation-button-selfreview"
             onClick={() => handleDifficultyClick(3)}
           >
             Very hard
@@ -192,16 +218,16 @@ const SelfReview = ({
       ) : currentQuestion === 1 ? (
         <>
           <h2>How reactive were you?</h2>
-          <button className="evaluation-button" onClick={() => handleSubmit(0)}>
+          <button className="evaluation-button-selfreview" onClick={() => handleSubmit(0)}>
             Cool
           </button>
-          <button className="evaluation-button" onClick={() => handleSubmit(1)}>
+          <button className="evaluation-button-selfreview" onClick={() => handleSubmit(1)}>
             On the Spot
           </button>
-          <button className="evaluation-button" onClick={() => handleSubmit(2)}>
+          <button className="evaluation-button-selfreview" onClick={() => handleSubmit(2)}>
             Over Expectation
           </button>
-          <button className="evaluation-button" onClick={() => handleSubmit(3)}>
+          <button className="evaluation-button-selfreview" onClick={() => handleSubmit(3)}>
             Prodigious
           </button>
         </>

@@ -4,6 +4,7 @@ import Sidebar from "../Components/Sidebar";
 
 import Homepage from "./Homepage";
 import thanksandtip from '../images/Thanksandtip.png';
+import Cookies from "js-cookie"; // Importez la bibliothèque js-cookie
 
 class LoginPage extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class LoginPage extends Component {
             localStorage.setItem("userId", data.userId);
             localStorage.setItem("userName", data.userName);
             localStorage.setItem("isCEO", data.isCEO);
+            Cookies.set("token", data.token, { secure: true }); // Ajout du stockage du token dans un cookie sécurisé
           });
 
           console.log(localStorage.getItem("isCEO"));

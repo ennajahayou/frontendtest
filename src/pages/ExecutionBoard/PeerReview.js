@@ -1,6 +1,9 @@
 // Importations inchangées
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./PeerReview.css";
+import righthand from '../../images/icones/hand-right.png';
+import lefthand from '../../images/icones/hand-left.png';
 
 const PeerReview = ({ executionId, setShowPeerReview }) => {
   // States inchangés
@@ -14,7 +17,7 @@ const PeerReview = ({ executionId, setShowPeerReview }) => {
   const [expectedResult, setExpectedResult] = useState(0);
   const [reactivity, setReactivity] = useState(0);
   const [comments, setComments] = useState("");
-  const [peerReviewQuestion, setPeerReviewQuestion] = useState(-1);
+  const [peerReviewQuestion, setPeerReviewQuestion] = useState(0);
 
   useEffect(() => {
     axios
@@ -103,44 +106,37 @@ const PeerReview = ({ executionId, setShowPeerReview }) => {
         </div>
       ) : peerReviewQuestion === 0 ? (
         <>
-          <h3
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              top: "20px",
-              marginBottom: "90px",
-              fontSize: "30px",
-            }}
+          <h3 className="result-peerreview"
           >
             Expected Result
           </h3>
-          <h3 style={{ fontSize: "25px" }}>
+          <h3 className="question-peerreview" style={{ fontSize: "25px" }}>
             Does the work reach the expected Goal ?
           </h3>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: "#E7827C" }}
             onClick={() => handleExpectations(0)}
           >
             Acceptable
           </button>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "orange" }}
+            style={{ backgroundColor: "#F8BB45" }}
             onClick={() => handleExpectations(1)}
           >
             Meet expectation
           </button>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "#228B22" }}
+            style={{ backgroundColor: "#B0D715" }}
             onClick={() => handleExpectations(2)}
           >
             Over expectation
           </button>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "darkgreen" }}
+            style={{ backgroundColor: "#248D35" }}
             onClick={() => handleExpectations(3)}
           >
             Excellent
@@ -148,42 +144,35 @@ const PeerReview = ({ executionId, setShowPeerReview }) => {
         </>
       ) : peerReviewQuestion === 1 ? (
         <>
-          <h3
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              top: "20px",
-              marginBottom: "90px",
-              fontSize: "30px",
-            }}
+          <h3 className="result-peerreview"
           >
             Reactivity
           </h3>
-          <h3 style={{ fontSize: "25px" }}>How reactive was the talent ?</h3>
+          <h3 className="question-peerreview" style={{ fontSize: "25px" }}>How reactive was the talent ?</h3>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: "#E7827C" }}
             onClick={() => handleReactivity(0)}
           >
             Cool
           </button>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "orange" }}
+            style={{ backgroundColor: "#F8BB45" }}
             onClick={() => handleReactivity(1)}
           >
             On the Spot
           </button>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "#228B22" }}
+            style={{ backgroundColor: "#B0D715" }}
             onClick={() => handleReactivity(2)}
           >
             Over Expectation
           </button>
           <button
             className="evaluation-button"
-            style={{ backgroundColor: "darkgreen" }}
+            style={{ backgroundColor: "#248D35" }}
             onClick={() => handleReactivity(3)}
           >
             Prodigious
@@ -191,34 +180,20 @@ const PeerReview = ({ executionId, setShowPeerReview }) => {
         </>
       ) : peerReviewQuestion === 2 ? (
         <>
-          <h3
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              top: "20px",
-              marginBottom: "150px",
-              fontSize: "30px",
-            }}
+          <h3 className="result-peerreview"
+
           >
             Finally
           </h3>
-          <h3 style={{ textAlign: "center", fontSize: "25px" }}>
+          <h3 className="question-peerreview" style={{ textAlign: "center", fontSize: "25px" }}>
             What would it take to make it better ?
           </h3>
-          <input
+          <input 
+          className="input-feed"
             type="text"
-            placeholder=""
+            placeholder="describe it here..."
             onChange={(e) => setComments(e.target.value)}
             value={comments}
-            style={{
-              backgroundColor: "#dcdcdc",
-              borderRadius: "20px",
-              width: "50%",
-              height: "30px",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "none",
-            }}
           />
           <div
             style={{
@@ -232,23 +207,32 @@ const PeerReview = ({ executionId, setShowPeerReview }) => {
               style={{ fontSize: "25px", cursor: "pointer" }}
               onClick={handleSubmit}
             >
-              Send your feedback
+              Send your feedback    ➡
             </span>
           </div>
         </>
       ) : (
-        <div className="evaluation-container1">
-          <h1>CONGRATULATION!</h1>
-          <p>You win thanks by Peer reviewing</p>
-          <p>XX Thanks</p>
-          <span
+
+        <>
+          <h1>CONGRATULATION !</h1>
+
+        <>
+          <p>You win Thanks for your peer review</p>
+          <p>{` Thanks`}</p>
+        </>
+          <div className="congratulations-peer">
+          <img className="lefthand" src={lefthand} />
+          <button
+            className="backtofeed-button-peer"
             onClick={() => window.location.reload()}
-            // setShowPeerReview(false)}
-            style={{ fontSize: "25px", cursor: "pointer" }}
+            // setShowEvaluation(false)}
           >
-            Return to execution Board
-          </span>
-        </div>
+            Back to Feed
+          </button>
+          <img className="righthand" src={righthand} />
+          </div>
+        </>
+
       )}
     </div>
   );

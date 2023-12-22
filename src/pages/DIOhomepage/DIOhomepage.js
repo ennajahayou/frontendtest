@@ -18,7 +18,10 @@ import PeerReview from "../ExecutionBoard/PeerReview";
 import axios from "axios";
 import CEOReview from "../CEOProfil/CEOReview";
 import CEONotYet from "../CEOProfil/CEONotYet";
+import CEORejected from "../CEOProfil/CEORejected";
 import CEOreviewPopUp from "../DIOhomepage/PopUp/CEOreviewPopUp";
+import PeerReviewPopUp from "../DIOhomepage/PopUp/PeerReviewPopUp";
+
 
 import "./DIOhomepage.css";
 
@@ -39,16 +42,21 @@ const DIOhomepage = () => {
   const [createExecutionText, setCreateExecutionText] = useState("");
   const [WorkText, setWorkText] = useState("");
   const [CommentCEO, setCommentCEO] = useState("");
+  const [CommentPeerReview, setCommentPeerReview] = useState("");
+
   const [feedbackCEO, setFeedbackCEO] = useState("");
   const [link, setLink] = useState(""); // State to store link value
 
   let [currentExecution, setCurrentExecution] = useState(null);
   let [name, setName] = useState(null);
-  let [linktoCEO, setLinktoCEO] = useState(null);
+  let [linkto, setLinkto] = useState(null);
 
   const [showPopUpCEO, setShowPopUpCEO] = useState(false);
+  const [showPopUpPeerReview, setShowPopUpPeerReview] = useState(false);
+
   const [ceoReview, setCeoReview] = useState(false);
   const [ceoNotYet, setCeoNotYet] = useState(false);
+  const [ceoRejected, setRejected] = useState(false);
   const [executionId, setExecutionId] = useState(0);
   const [isAttributingExecution, setIsAttributingExecution] = useState(false);
   const [isCreatingExecution, setIsCreatingExecution] = useState(false);
@@ -68,15 +76,17 @@ const DIOhomepage = () => {
 
   const [showPeerReview, setShowPeerReview] = useState(false);
 
-  let handlePeerReviewClick = (executionId) => {
-    setShowPeerReview(true);
+  let handlePeerReviewClick = (executionId, name ,link) => {
+    setShowPopUpPeerReview(true);
     setCurrentExecution(executionId);
+    setName(name);
+    setLinkto(link)
   };
   let handleCEOReview = (executionId , name ,link) => {
     setCurrentExecution(executionId); // Set the ID of the execution card clicked
     setShowPopUpCEO(true);
     setName(name);
-    setLinktoCEO(link) // Toggle the CEO review popup
+    setLinkto(link) // Toggle the CEO review popup
   };
   console.log(dioTasks)
   const sortedDioTasks = dioTasks.slice().sort((a, b) => a.id - b.id);
@@ -101,6 +111,52 @@ const DIOhomepage = () => {
             deadline={execution.deadline}
           />
         );
+        case "Open":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.review_comments}
+              selfDifficulty ={execution.review_difficulty}
+              selfReactivity ={execution.review_reactivity}
+              clickreview={() => handlePeerReviewClick(execution.id,execution.talent_name ,execution.link)}
+              showceopop={() => handleCEOReview(execution.id ,execution.talent_name ,execution.link) }
+              currentExecution={() =>{ setCurrentExecution(execution.id)}}
+              ceo_comments={execution.ceo_comments}
+              ceo_expectations={execution.ceo_expectations}
+              ceo_reactivity={execution.ceo_reactivity}
+              remainingTime={execution.remaining_time}
+              link={execution.link}
+              ceoFeedback={execution.ceo_feedback}
+              achievement_date={execution.creation_date}
+              thanks={execution.score_thanks}
+            />
+          );
+          case "Rejected":
+            return (
+              <ExecutionInReview
+                id={execution.id}
+                description={execution.exec_description}
+                talent={execution.talent_name}
+                status={execution.status_}
+                comments={execution.review_comments}
+                selfDifficulty ={execution.review_difficulty}
+                selfReactivity ={execution.review_reactivity}
+                clickreview={() => handlePeerReviewClick(execution.id,execution.talent_name ,execution.link)}
+                showceopop={() => handleCEOReview(execution.id ,execution.talent_name ,execution.link) }
+                currentExecution={() =>{ setCurrentExecution(execution.id)}}
+                ceo_comments={execution.ceo_comments}
+                ceo_expectations={execution.ceo_expectations}
+                ceo_reactivity={execution.ceo_reactivity}
+                remainingTime={execution.remaining_time}
+                link={execution.link}
+                ceoFeedback={execution.ceo_feedback}
+                achievement_date={execution.creation_date}
+                thanks={execution.score_thanks}
+              />
+            );
       case "On going":
           return (
             <ExecutionInReview
@@ -111,7 +167,7 @@ const DIOhomepage = () => {
               comments={execution.review_comments}
               selfDifficulty ={execution.review_difficulty}
               selfReactivity ={execution.review_reactivity}
-              clickreview={() => handlePeerReviewClick(execution.id)}
+              clickreview={() => handlePeerReviewClick(execution.id,execution.talent_name ,execution.link)}
               showceopop={() => handleCEOReview(execution.id ,execution.talent_name ,execution.link) }
               currentExecution={() =>{ setCurrentExecution(execution.id)}}
               ceo_comments={execution.ceo_comments}
@@ -120,6 +176,8 @@ const DIOhomepage = () => {
               remainingTime={execution.remaining_time}
               link={execution.link}
               ceoFeedback={execution.ceo_feedback}
+              achievement_date={execution.creation_date}
+              thanks={execution.score_thanks}
             />
           );
       case "In review":
@@ -132,7 +190,7 @@ const DIOhomepage = () => {
             comments={execution.review_comments}
             selfDifficulty ={execution.review_difficulty}
             selfReactivity ={execution.review_reactivity}
-            clickreview={() => handlePeerReviewClick(execution.id)}
+            clickreview={() => handlePeerReviewClick(execution.id,execution.talent_name ,execution.link)}
             showceopop={() => handleCEOReview(execution.id ,execution.talent_name ,execution.link) }
             currentExecution={() =>{ setCurrentExecution(execution.id)}}
             ceo_comments={execution.ceo_comments}
@@ -140,6 +198,8 @@ const DIOhomepage = () => {
             ceo_reactivity={execution.ceo_reactivity}
             remainingTime={execution.remaining_time}
             link={execution.link}
+            achievement_date={execution.creation_date}
+            thanks={execution.score_thanks}
           />
         );
         case "Achieved":
@@ -152,7 +212,7 @@ const DIOhomepage = () => {
               comments={execution.review_comments}
               selfDifficulty ={execution.review_difficulty}
               selfReactivity ={execution.review_reactivity}
-              clickreview={() => handlePeerReviewClick(execution.id)}
+              clickreview={() => handlePeerReviewClick(execution.id,execution.talent_name ,execution.link)}
               showceopop={() => handleCEOReview(execution.id) }
               currentExecution={() =>{ setCurrentExecution(execution.id)}}
               ceo_comments={execution.ceo_comments}
@@ -160,6 +220,7 @@ const DIOhomepage = () => {
               ceo_reactivity={execution.ceo_reactivity}
               link={execution.link}
               achievement_date={execution.creation_date}
+              thanks={execution.score_thanks}
             />
           );
       default:
@@ -209,7 +270,13 @@ const DIOhomepage = () => {
           executionId={currentExecution}
           feedback={feedbackCEO}
           setFeedback={setFeedbackCEO}
-        /> ):(
+        /> ):ceoRejected ? (
+          <CEORejected
+          executionId={currentExecution}
+          feedback={feedbackCEO}
+          setFeedback={setFeedbackCEO}
+          />
+        ):(
         <div className="main-content">
                   <Wallet  />
           <div className="logo-bar">
@@ -278,8 +345,19 @@ const DIOhomepage = () => {
            comments={CommentCEO}
            setComments={setCommentCEO}
            executor={name}
-           link={linktoCEO}
+           link={linkto}
            setCEONotYet={setCeoNotYet}
+           setCEORejected={setRejected}
+           />
+      )}
+        {showPopUpPeerReview && ( 
+           <PeerReviewPopUp
+           setShowPopUpPeerReview={setShowPopUpPeerReview}
+           setPeerReview={setShowPeerReview}
+           comments={CommentPeerReview}
+           setComments={setCommentPeerReview}
+           executor={name}
+           link={linkto}
            />
       )}
       {showPopUpCEO && ( console.log(currentExecution) )}

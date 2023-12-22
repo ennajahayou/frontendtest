@@ -9,7 +9,7 @@ import axios from "axios";
 
 const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,
   selfReactivity,clickreview ,showceopop , ceo_comments ,ceo_expectations, 
-  ceo_reactivity ,remainingTime,link , achievement_date ,ceoFeedback }) => {
+  ceo_reactivity ,remainingTime,link , achievement_date ,ceoFeedback ,thanks}) => {
   
    /* const [remainingtime, setRemainingTime] = useState(remainingTime);
 
@@ -53,13 +53,15 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
     } else if (values[selfDifficulty] === 20 || values[selfReactivity] === 20) {
       departHours = DEADLINES.DEAD3 ;
     };
+  } else{
+    thanks=departHours;
   }
 
 
   const { hours, minutes, seconds } = useCountdown(remainingTime);
 
   useEffect(() => {
-    if (departHours < 6 && remainingTime == null) {
+    if (departHours < 6 && remainingTime == null ){
       setShowCountdown(false);
       setShowThanks(true);
     } else {
@@ -84,6 +86,8 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };
+
+  
   return (
     <div>
     <div className="message bubble">
@@ -92,17 +96,13 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       <div className="first-row">
       <div className="creator">Creator :<div style={divStyle}>{talent}</div> </div>
       <div className="statut">Status :<div style={divStyle}>  {status}</div></div>
-      <div className="count-down" >{showCountdown  ? ( 
-        <>{status ==="In review" &&(
+      <div className="count-down" >{status ==="In review"  ? ( 
           <p >Review Countdown <div style={divStyle}>{`${hours}H:${minutes}Mn`}</div></p>
-          )}
-          {<> </>}
-        </>
-      ) : (
-        <>
+      ) : status ==="Achieved"  ?(
           <p >Achievement Date :<div style={divStyle}>{achievement_date.substring(0,10)+"   "+achievement_date.substring(11,16)}</div></p>
-        </>
-       )}</div>
+       ):status ==="Open" ?(<p >No Countdown for<div style={divStyle}>Open</div></p>
+       ):status ==="Rejected" ?(<p >Date of Closing :<div style={divStyle}></div></p>
+       ):(<p >Due Date :<div style={divStyle}></div></p>)}</div>
       </div>
       <div className="description-diopage">
       <div>Execution description :<div style={divStyle}>{description}</div></div>
@@ -112,15 +112,11 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         <img className="profile" src={personna} />
         <div className="name"> <div style={divStyle}> {talent} </div></div>
         <div className="thanks-score">
-        {showThanks ? (
-        <>
-          <p>Thanks :<div style={divStyle}>{departHours}</div>  <img className="symbole_th" src={logo5} /></p>
-        </>
-      ) : (
-        <>
+        {status ==="In review"  ? ( 
           <p>Thanks :<div style={divStyle}> Not Yet</div></p>
-        </>
-      )}</div>
+      ) : status ==="Achieved"  ?(
+        <p>Thanks :<div style={divStyle}>{thanks}</div>  <img className="symbole_th" src={logo5} /></p>
+       ):(<p>Thanks :<div style={divStyle}> Not Yet</div></p>)}</div>
 
       </div>
       </div>
@@ -152,11 +148,10 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         <div>Anonyme Peer review 2 Feedback with Choice on Result and Reactivity</div>
         <div>Anonyme Peer review n Feedback with Choice on Result and Reactivity</div>
       </div>
-      <div className="ceo-eval">
         {ceo_comments === null && ceo_expectations ===null && ceo_reactivity===null && status === "In review" ? (        
-        <div>CEO Evaluation :<div style={divStyle}> Not Yet</div> </div>
-        ):status === "On going" ?(<div>CEO Evaluation :<div style={divStyle}> {ceoFeedback}</div> </div>):(
-          <div>
+        <div></div>
+        ):status === "On going" ?(<div className="ceo-eval">CEO Evaluation :<div style={divStyle}> {ceoFeedback}</div> </div>):(
+          <div className="ceo-eval">
           <div>CEO Evaluation :<div style={divStyle}> {ceo_comments} </div> </div>
           <div> Expectations :<div style={divStyle}> {expectations[ceo_expectations]} </div></div>  
           <div>Reactivity :<div style={divStyle}> {reactivity[ceo_reactivity]} </div></div>
@@ -164,18 +159,48 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
         )}
       </div>
       </div>
-      </div>
       )}
       <button onClick={toggleDetails}>
         {showDetails ? '-' : '+'}
       </button>
-      {localStorage.getItem("isCEO") === "1" ? (   
-       ceo_comments === null && status ==="In review" && talent !== userName && (
-      <button className="review"  onClick={() => showceopop(id)}><div style={divStyle}> CEO Evaluation</div></button>
-        )
-        ) :status ==="In review" && talent !== userName && (
-      <button className="review"  onClick={() => clickreview(id)}><div style={divStyle}> Make a review</div></button>
-      )}
+      {localStorage.getItem("isCEO") === "1" ? (
+  <>
+    {ceo_comments === null && status === "In review" && talent !== userName && (
+      <button className="review" onClick={() => showceopop(id)}>
+        <div style={divStyle}> Evaluate it </div>
+      </button>
+    )}
+    {status === "Open" && talent !== userName && (
+      <button className="review">
+        <div style={divStyle}> I want to do it </div>
+      </button>
+    )}
+    {status === "On going" && talent === userName && (
+      <button className="review">
+        <div style={divStyle}> Submit my work </div>
+      </button>
+    )}
+  </>
+) : (
+  <>
+    {status === "In review" && talent !== userName && (
+      <button className="review" onClick={() => clickreview(id)}>
+        <div style={divStyle}> Make a review</div>
+      </button>
+    )}
+    {status === "Open" && talent !== userName && (
+      <button className="review">
+        <div style={divStyle}> I want to do it</div>
+      </button>
+    )}
+    {status === "On going" && talent === userName && (
+      <button className="review">
+        <div style={divStyle}> Submit my work</div>
+      </button>
+    )}
+  </>
+)}
+
       </div>
     </div>
 

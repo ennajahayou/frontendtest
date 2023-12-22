@@ -274,10 +274,25 @@ h1 {
   width: 20%;
   margin-left: 50%;
 }
+.evaluation-button-ceoreview{
+  font-family: 'Kumbh Sans', sans-serif;
+font-size: 70%;
+border: none;
+border-radius: 25px;
+padding: 10px 30px;
+margin: 10px 0;
+cursor: pointer;
+font-size: 18px;
+transition: 0.3s;
+width: 50%;
+background-color: #8bc4d0;
+}
 
-.evaluation-button:hover {
+.evaluation-button-ceoreview:hover {
   background-color: #8bc4d0;
 }
+
+
 
 .evaluation-container h1 {
   margin-top: 20vh;
@@ -409,4 +424,20 @@ h1 {
 
 .scroll::-webkit-scrollbar-thumb:hover {
   background-color: #696969; /* Couleur du curseur lors du survol */
+}
+
+.result{
+  font-family: 'Kumbh Sans', sans-serif;
+  display: "flex";
+  margin-bottom: 10vh;
+  top:9vh;
+  font-weight: 800;
+  font-size: 150%;
+  background-color: transparent;
+}
+/*justifyContent: "center",*/
+.question{
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 400;
+  margin-bottom: 10%;
 }

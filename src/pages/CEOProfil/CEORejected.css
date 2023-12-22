@@ -1,0 +1,65 @@
+.better{
+    margin-top: 10vh;
+    font-size: 150%; 
+    font-weight: 500;   
+}
+
+h3{
+  font-size: 150%;  
+}
+
+
+.input-feed{
+    background-color: rgb(221, 216, 216);
+    color: black;
+    height: 10vh;
+    width: 30vw;
+    border-radius: 10px;
+    border: 200%;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+
+}
+.feedback{
+    margin-top: 20vh;
+    font-size: 150%;
+}
+
+.input-feed {
+    border: none; /* Remove the border */
+    color: black; /* Set text color */
+    font-family: 'Kumbh Sans', sans-serif;
+  }
+  
+  /* Change placeholder color */
+  /* For modern browsers */
+  ::placeholder {
+    color: black;
+  }
+
+  .input-feed::-webkit-input-placeholder {
+    color: black;
+  }
+  
+  .input-feed::-moz-placeholder {
+    color: black;
+  }
+  
+  .input-feed:-ms-input-placeholder {
+    color: black;
+  }
+
+.propose{
+    margin-top: 2vh;
+}
+
+.case{
+    width: 4vw;
+    height: 4vh;
+}
+
+.propose label{
+    margin-bottom: 2vh;
+}

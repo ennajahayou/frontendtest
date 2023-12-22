@@ -107,40 +107,70 @@ const Archives = () => {
             deadline={execution.deadline}
           />
         );
+      case "On going":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.review_comments}
+              selfDifficulty ={execution.review_difficulty}
+              selfReactivity ={execution.review_reactivity}
+              clickreview={() => handlePeerReviewClick(execution.id)}
+              showceopop={() => handleCEOReview(execution.id ,execution.talent_name ,execution.link) }
+              currentExecution={() =>{ setCurrentExecution(execution.id)}}
+              ceo_comments={execution.ceo_comments}
+              ceo_expectations={execution.ceo_expectations}
+              ceo_reactivity={execution.ceo_reactivity}
+              remainingTime={execution.remaining_time}
+              link={execution.link}
+              ceoFeedback={execution.ceo_feedback}
+              achievement_date={execution.creation_date}
+              thanks={execution.score_thanks}
+            />
+          );
       case "In review":
         return (
           <ExecutionInReview
-          id={execution.id}
-          description={execution.exec_description}
-          talent={execution.talent_name}
-          status={execution.status_}
-          comments={execution.review_comments}
-          selfDifficulty ={execution.difficulty}
-          selfReactivity ={execution.review_reactivity}
-          clickreview={handlePeerReviewClick}
-          showceopop={() => handleCEOReview(execution.id) }
-          currentExecution={() =>{ setCurrentExecution(execution.id)}}
-          ceo_comments={execution.ceo_comments}
-          ceo_expectations={execution.expectations}
-          ceo_reactivity={execution.ceo_reactivity}
-          />
-        );
-        case "Achieved":
-          return (
-            <ExecutionInReview
             id={execution.id}
             description={execution.exec_description}
             talent={execution.talent_name}
             status={execution.status_}
             comments={execution.review_comments}
-            selfDifficulty ={execution.difficulty}
+            selfDifficulty ={execution.review_difficulty}
             selfReactivity ={execution.review_reactivity}
-            clickreview={handlePeerReviewClick}
-            showceopop={() => handleCEOReview(execution.id) }
+            clickreview={() => handlePeerReviewClick(execution.id)}
+            showceopop={() => handleCEOReview(execution.id ,execution.talent_name ,execution.link) }
             currentExecution={() =>{ setCurrentExecution(execution.id)}}
             ceo_comments={execution.ceo_comments}
-            ceo_expectations={execution.expectations}
+            ceo_expectations={execution.ceo_expectations}
             ceo_reactivity={execution.ceo_reactivity}
+            remainingTime={execution.remaining_time}
+            link={execution.link}
+            achievement_date={execution.creation_date}
+            thanks={execution.score_thanks}
+          />
+        );
+        case "Achieved":
+          return (
+            <ExecutionInReview
+              id={execution.id}
+              description={execution.exec_description}
+              talent={execution.talent_name}
+              status={execution.status_}
+              comments={execution.review_comments}
+              selfDifficulty ={execution.review_difficulty}
+              selfReactivity ={execution.review_reactivity}
+              clickreview={() => handlePeerReviewClick(execution.id)}
+              showceopop={() => handleCEOReview(execution.id) }
+              currentExecution={() =>{ setCurrentExecution(execution.id)}}
+              ceo_comments={execution.ceo_comments}
+              ceo_expectations={execution.ceo_expectations}
+              ceo_reactivity={execution.ceo_reactivity}
+              link={execution.link}
+              achievement_date={execution.creation_date}
+              thanks={execution.score_thanks}
             />
           );
       default:

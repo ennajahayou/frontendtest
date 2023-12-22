@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./ExecutionCreation.css";
 
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const ExecutionCreation = ({
   executionDescription,
@@ -16,6 +17,7 @@ const ExecutionCreation = ({
   const handleNext = () => {
     setHowAreYouGoingToMakeIt(false);
   };
+  const token = Cookies.get("token");
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -36,7 +38,11 @@ const ExecutionCreation = ({
     setIsCreatingExecution(false);
 
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + "/execution", jsonData)
+      .post(process.env.REACT_APP_BACKEND_URL + "/execution", jsonData,              {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ajouter le token aux en-têtes
+        },
+      })
       .then((res) => {
         if (res.status === 200) {
           window.location.reload();

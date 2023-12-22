@@ -100,7 +100,6 @@ h1 {
   border: 1px solid black;
   cursor: pointer; /* Pour changer le curseur en main lorsque vous survolez le bouton */
   border-radius: 40px; /* Pour avoir des coins arrondis sur le bouton */
-
   justify-content: center;
   align-items: center;
   padding: 5px 10px;

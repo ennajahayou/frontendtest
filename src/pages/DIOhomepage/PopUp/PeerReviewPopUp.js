@@ -1,34 +1,29 @@
 import axios from "axios";
 import { useState, useContext, useEffect, useRef } from "react";
-import "./CEOreviewPopUp.css";
+import "./PeerReviewPopUp.css";
 
-const CEOreviewPopUp = ({
-  setShowPopUpCEO,
-  setCEOReview,
+const PeerReviewPopUp = ({
+  setShowPopUpPeerReview,
+  setPeerReview,
   comments,
   setComments,
   setExecutionId,
   setName,
   executor,
-  setCEONotYet,
-  setCEORejected,
+  setPeerReviewNotYet,
   link
 
 }) => {
   // TODO: add real information in jsonData
   const handleClickNotYet = () => {
-    setShowPopUpCEO(false);
-    setCEONotYet(true);
+    setShowPopUpPeerReview(false);
+    setPeerReviewNotYet(true);
   };
 
-  const handleClickreject = () => {
-    setShowPopUpCEO(false);
-    setCEORejected(true);
-  };
 
   const handleClickEvaluate = () => {
-    setShowPopUpCEO(false);
-    setCEOReview(true);
+    setShowPopUpPeerReview(false);
+    setPeerReview(true);
   };
 
   const popUpRef = useRef(null);
@@ -36,7 +31,7 @@ const CEOreviewPopUp = ({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popUpRef.current && !popUpRef.current.contains(event.target)) {
-        setShowPopUpCEO(false);
+        setShowPopUpPeerReview(false);
       }
     };
 
@@ -45,12 +40,12 @@ const CEOreviewPopUp = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [setShowPopUpCEO]);
+  }, [setShowPopUpPeerReview]);
 
 
 
   return (
-    <div ref={popUpRef} className="submition-pop-up-work-ceo">
+    <div ref={popUpRef} className="submition-pop-up-work-peerreview">
     <h2 style={{wordWrap: 'break-word'} }>{executor}'s work</h2>
     <div className="input-circle">
     <div className="span">
@@ -72,20 +67,14 @@ const CEOreviewPopUp = ({
       Not yet
     </button>
     <button
-      className="button2"
-      onClick={handleClickreject}
-    >     
-      Reject
-    </button>
-    <button
       className="button3"
       onClick={handleClickEvaluate}
     >     
-      Evaluate it
+      Make Review
     </button>
     </div>
     </div>
   );
 };
 
-export default CEOreviewPopUp;
+export default PeerReviewPopUp;
