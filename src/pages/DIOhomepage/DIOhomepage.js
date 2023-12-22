@@ -132,6 +132,8 @@ const DIOhomepage = () => {
               ceoFeedback={execution.ceo_feedback}
               achievement_date={execution.creation_date}
               thanks={execution.score_thanks}
+              peerReview_comments={execution.peer_review_comments}
+              peerReviewers_ids={execution.peer_review_ids}
             />
           );
           case "Rejected":
@@ -155,6 +157,8 @@ const DIOhomepage = () => {
                 ceoFeedback={execution.ceo_feedback}
                 achievement_date={execution.creation_date}
                 thanks={execution.score_thanks}
+                peerReview_comments={execution.peer_review_comments}
+                peerReviewers_ids={execution.peer_review_ids}
               />
             );
       case "On going":
@@ -178,6 +182,8 @@ const DIOhomepage = () => {
               ceoFeedback={execution.ceo_feedback}
               achievement_date={execution.creation_date}
               thanks={execution.score_thanks}
+              peerReview_comments={execution.peer_review_comments}
+              peerReviewers_ids={execution.peer_review_ids}
             />
           );
       case "In review":
@@ -200,6 +206,8 @@ const DIOhomepage = () => {
             link={execution.link}
             achievement_date={execution.creation_date}
             thanks={execution.score_thanks}
+            peerReview_comments={execution.peer_review_comments}
+            peerReviewers_ids={execution.peer_review_ids}
           />
         );
         case "Achieved":
@@ -221,6 +229,8 @@ const DIOhomepage = () => {
               link={execution.link}
               achievement_date={execution.creation_date}
               thanks={execution.score_thanks}
+              peerReview_comments={execution.peer_review_comments}
+              peerReviewers_ids={execution.peer_review_ids}
             />
           );
       default:

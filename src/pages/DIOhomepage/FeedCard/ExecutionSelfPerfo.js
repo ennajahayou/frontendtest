@@ -8,7 +8,7 @@ import axios from "axios";
 //import socket from "../../../socket";
 
 const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDifficulty ,
-  selfReactivity,clickreview ,showceopop , ceo_comments ,ceo_expectations, 
+  selfReactivity,clickreview ,showceopop , ceo_comments ,peerReviewers_ids,peerReview_comments, ceo_expectations, 
   ceo_reactivity ,remainingTime,link , achievement_date ,ceoFeedback ,thanks}) => {
   
    /* const [remainingtime, setRemainingTime] = useState(remainingTime);
@@ -77,15 +77,26 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
     fontWeight: 'bold', // Poids de police plus épais
   };
 
+
+
   const handlePeerReviewClick = () => {
     setShowPeerReview(true);
   };
   const userName = localStorage.getItem('userName');
+  const userId = localStorage.getItem('userId');
 
 
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };
+  let userIdInt = parseInt(userId, 10);
+  let parsedPeerReviewIds = [];
+if (peerReviewers_ids && typeof peerReviewers_ids === 'string' && peerReviewers_ids.trim() !== '') {
+  parsedPeerReviewIds = peerReviewers_ids.split(',').map(id => parseInt(id.trim(), 10));
+}
+
+console.log(parsedPeerReviewIds,userId, parsedPeerReviewIds.includes(userId))
+
 
   
   return (
@@ -143,11 +154,14 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
       </div>
       </div>
       <div className="add-second">
-      <div className="peer-review">
-        <div>Anonyme Peer review 1 Feedback with Choice on Result and Reactivity</div>
-        <div>Anonyme Peer review 2 Feedback with Choice on Result and Reactivity</div>
-        <div>Anonyme Peer review n Feedback with Choice on Result and Reactivity</div>
-      </div>
+      {peerReview_comments === null &&  status === "In review" ? (        
+        <div></div>
+        ):status === "On going" ?(  <div></div>):(
+          <div className="ceo-eval">
+        <div>{peerReview_comments}</div>
+
+          </div>
+        )}
         {ceo_comments === null && ceo_expectations ===null && ceo_reactivity===null && status === "In review" ? (        
         <div></div>
         ):status === "On going" ?(<div className="ceo-eval">CEO Evaluation :<div style={divStyle}> {ceoFeedback}</div> </div>):(
@@ -183,10 +197,15 @@ const ExecutionInReview = ({ id, description, talent ,status ,comments,selfDiffi
   </>
 ) : (
   <>
-    {status === "In review" && talent !== userName && (
+    {  !parsedPeerReviewIds.includes(userIdInt)  && status === "In review" && talent !== userName && (
       <button className="review" onClick={() => clickreview(id)}>
         <div style={divStyle}> Make a review</div>
       </button>
+    )}
+        {  parsedPeerReviewIds.includes(userIdInt)  && status === "In review" && talent !== userName && (
+
+        <div style={divStyle}></div>
+
     )}
     {status === "Open" && talent !== userName && (
       <button className="review">
